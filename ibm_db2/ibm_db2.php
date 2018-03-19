@@ -10,7 +10,7 @@
  * represents the database alias in the DB2 client catalog.
  * </p>
  * <p>
- * For an uncataloged connection to a database, 
+ * For an uncataloged connection to a database,
  * database represents a complete connection
  * string in the following format:
  * DATABASE=database;HOSTNAME=hostname;PORT=port;PROTOCOL=TCPIP;UID=username;PWD=password;
@@ -45,7 +45,7 @@
  * Passing the DB2_AUTOCOMMIT_OFF value turns
  * autocommit off for this connection handle.
  * </p>
- * @return resource a connection handle resource if the connection attempt is
+ * @return resource|false a connection handle resource if the connection attempt is
  * successful. If the connection attempt fails, db2_connect
  * returns false.
  */
@@ -86,7 +86,7 @@ function db2_commit ($connection) {}
  * Passing the DB2_AUTOCOMMIT_OFF value turns
  * autocommit off for this connection handle.
  * </p>
- * @return resource a connection handle resource if the connection attempt is
+ * @return resource|false a connection handle resource if the connection attempt is
  * successful. db2_pconnect tries to reuse an existing
  * connection resource that exactly matches the
  * database, username, and
@@ -103,7 +103,7 @@ function db2_pconnect ($database, $username, $password, array $options = null) {
  * db2_connect or db2_pconnect.
  * </p>
  * @param value bool[optional] <p>
- * One of the following constants: 
+ * One of the following constants:
  * DB2_AUTOCOMMIT_OFF
  * <p>
  * Turns AUTOCOMMIT off.
@@ -129,16 +129,16 @@ function db2_autocommit ($connection, $value = null) {}
  * @param stmt resource <p>
  * A prepared statement returned from db2_prepare.
  * </p>
- * @param parameter_number int 
- * @param variable_name string 
- * @param parameter_type int[optional] 
- * @param data_type int[optional] 
+ * @param parameter_number int
+ * @param variable_name string
+ * @param parameter_type int[optional]
+ * @param data_type int[optional]
  * @param precision int[optional] <p>
  * Specifies the precision with which the variable should be bound to the
- * database. This parameter can also be used for retrieving XML output values 
- * from stored procedures. A non-negative value specifies the maximum size of 
- * the XML data that will be retrieved from the database. If this parameter 
- * is not used, a default of 1MB will be assumed for retrieving the XML 
+ * database. This parameter can also be used for retrieving XML output values
+ * from stored procedures. A non-negative value specifies the maximum size of
+ * the XML data that will be retrieved from the database. If this parameter
+ * is not used, a default of 1MB will be assumed for retrieving the XML
  * output value from the stored procedure.
  * </p>
  * @param scale int[optional] <p>
@@ -173,8 +173,8 @@ function db2_close ($connection) {}
  * The schema which contains the tables. To match all schemas, pass &null;
  * or an empty string.
  * </p>
- * @param table_name string[optional] 
- * @param column_name string[optional] 
+ * @param table_name string[optional]
+ * @param column_name string[optional]
  * @return resource a statement resource with a result set containing rows describing
  * the column privileges for columns matching the specified parameters. The
  * rows are composed of the following columns:
@@ -236,8 +236,8 @@ function db2_columnprivileges () {}
  * The schema which contains the tables. To match all schemas, pass
  * '%'.
  * </p>
- * @param table_name string[optional] 
- * @param column_name string[optional] 
+ * @param table_name string[optional]
+ * @param column_name string[optional]
  * @return resource a statement resource with a result set containing rows describing
  * the columns matching the specified parameters. The rows are composed of
  * the following columns:
@@ -356,7 +356,7 @@ function db2_columns ($connection, $qualifier = null, $schema = null, $table_nam
  * is &null;, db2_foreign_keys matches the schema for
  * the current connection.
  * </p>
- * @param table_name string 
+ * @param table_name string
  * @return resource a statement resource with a result set containing rows describing
  * the foreign keys for the specified table. The result set is composed of the
  * following columns:
@@ -460,7 +460,7 @@ function db2_foreignkeys () {}
  * is &null;, db2_primary_keys matches the schema for
  * the current connection.
  * </p>
- * @param table_name string 
+ * @param table_name string
  * @return resource a statement resource with a result set containing rows describing
  * the primary keys for the specified table. The result set is composed of the
  * following columns:
@@ -1098,8 +1098,8 @@ function db2_tableprivileges () {}
  * search pattern containing _ and %
  * as wildcards.
  * </p>
- * @param table_name string[optional] 
- * @param table_type string[optional] 
+ * @param table_name string[optional]
+ * @param table_type string[optional]
  * @return resource a statement resource with a result set containing rows describing
  * the tables that match the specified parameters. The rows are composed of
  * the following columns:
@@ -1159,7 +1159,7 @@ function db2_tables ($connection, $qualifier = null, $schema = null, $table_name
  * server. However, it is only supported by DB2 servers, and is much
  * slower than forward-only cursors.
  * </p>
- * @return resource a statement resource if the SQL statement was issued successfully,
+ * @return resource|false a statement resource if the SQL statement was issued successfully,
  * or false if the database failed to execute the SQL statement.
  */
 function db2_exec ($connection, $statement, array $options = null) {}
@@ -1192,7 +1192,7 @@ function db2_exec ($connection, $statement, array $options = null) {}
  * server. However, it is only supported by DB2 servers, and is much
  * slower than forward-only cursors.
  * </p>
- * @return resource a statement resource if the SQL statement was successfully parsed and
+ * @return resource|false a statement resource if the SQL statement was successfully parsed and
  * prepared by the database server. Returns false if the database server
  * returned an error. You can determine which error was returned by calling
  * db2_stmt_error or db2_stmt_errormsg.
@@ -1268,7 +1268,7 @@ function db2_stmt_error ($stmt = null) {}
  * A prepared statement returned from db2_exec or
  * db2_execute.
  * </p>
- * @return resource a new statement resource containing the next result set if the
+ * @return resource|false a new statement resource containing the next result set if the
  * stored procedure returned another result set. Returns false if the stored
  * procedure did not return another result set.
  */
@@ -1280,7 +1280,7 @@ function db2_next_result ($stmt) {}
  * @param stmt resource <p>
  * A valid statement resource containing a result set.
  * </p>
- * @return int an integer value representing the number of fields in the result
+ * @return int|false an integer value representing the number of fields in the result
  * set associated with the specified statement resource. Returns false if
  * the statement resource is not a valid input value.
  */
@@ -1292,8 +1292,10 @@ function db2_num_fields ($stmt) {}
  * @param stmt resource <p>
  * A valid stmt resource containing a result set.
  * </p>
- * @return int the number of rows affected by the last SQL statement issued by
+ * @return int|false the number of rows affected by the last SQL statement issued by
  * the specified statement handle.
+ * May return false:
+ * @link https://github.com/php/pecl-database-ibm_db2/blob/master/ibm_db2.c#L5516
  */
 function db2_num_rows ($stmt) {}
 
@@ -1308,7 +1310,7 @@ function db2_num_rows ($stmt) {}
  * representing the 0-indexed position of the column, or a string
  * containing the name of the column.
  * </p>
- * @return string a string containing the name of the specified column. If the
+ * @return string|false a string containing the name of the specified column. If the
  * specified column does not exist in the result
  * set, db2_field_name returns false.
  */
@@ -1325,7 +1327,7 @@ function db2_field_name ($stmt, $column) {}
  * representing the 0-indexed position of the column, or a string
  * containing the name of the column.
  * </p>
- * @return int an integer value with the maximum number of bytes required to
+ * @return int|false an integer value with the maximum number of bytes required to
  * display the specified column. If the column does not exist in the result
  * set, db2_field_display_size returns false.
  */
@@ -1342,7 +1344,7 @@ function db2_field_display_size ($stmt, $column) {}
  * representing the 0-indexed position of the column, or a string
  * containing the name of the column.
  * </p>
- * @return int an integer containing the 0-indexed position of the named column in
+ * @return int|false an integer containing the 0-indexed position of the named column in
  * the result set. If the specified column does not exist in the result set,
  * db2_field_num returns false.
  */
@@ -1359,7 +1361,7 @@ function db2_field_num ($stmt, $column) {}
  * representing the 0-indexed position of the column, or a string
  * containing the name of the column.
  * </p>
- * @return int an integer containing the precision of the specified column. If the
+ * @return int|false an integer containing the precision of the specified column. If the
  * specified column does not exist in the result set,
  * db2_field_precision returns false.
  */
@@ -1376,7 +1378,7 @@ function db2_field_precision ($stmt, $column) {}
  * representing the 0-indexed position of the column, or a string
  * containing the name of the column.
  * </p>
- * @return int an integer containing the scale of the specified column. If the
+ * @return int|false an integer containing the scale of the specified column. If the
  * specified column does not exist in the result set,
  * db2_field_scale returns false.
  */
@@ -1393,7 +1395,7 @@ function db2_field_scale ($stmt, $column) {}
  * representing the 0-indexed position of the column, or a string
  * containing the name of the column.
  * </p>
- * @return string a string containing the defined data type of the specified column.
+ * @return string|false a string containing the defined data type of the specified column.
  * If the specified column does not exist in the result set,
  * db2_field_type returns false.
  */
@@ -1410,7 +1412,7 @@ function db2_field_type ($stmt, $column) {}
  * representing the 0-indexed position of the column, or a string
  * containing the name of the column.
  * </p>
- * @return int an integer containing the width of the specified character or
+ * @return int|false an integer containing the width of the specified character or
  * binary data type column in a result set. If the specified column does not
  * exist in the result set, db2_field_width returns
  * false.
@@ -1460,7 +1462,7 @@ function db2_free_stmt ($stmt) {}
  * Either an integer mapping to the 0-indexed field in the result set, or
  * a string matching the name of the column.
  * </p>
- * @return mixed the value of the requested field if the field exists in the result
+ * @return mixed|null the value of the requested field if the field exists in the result
  * set. Returns NULL if the field does not exist, and issues a warning.
  */
 function db2_result ($stmt, $column) {}
@@ -1491,7 +1493,7 @@ function db2_fetch_row ($stmt, $row_number = null) {}
  * parameter results in a PHP warning if the result set uses a
  * forward-only cursor.
  * </p>
- * @return array an associative array with column values indexed by the column name
+ * @return array|false an associative array with column values indexed by the column name
  * representing the next or requested row in the result set. Returns false if
  * there are no rows left in the result set, or if the row requested by
  * row_number does not exist in the result set.
@@ -1509,7 +1511,7 @@ function db2_fetch_assoc ($stmt, $row_number = null) {}
  * parameter results in a PHP warning if the result set uses a
  * forward-only cursor.
  * </p>
- * @return array a 0-indexed array with column values indexed by the column position
+ * @return array|false a 0-indexed array with column values indexed by the column position
  * representing the next or requested row in the result set. Returns false if
  * there are no rows left in the result set, or if the row requested by
  * row_number does not exist in the result set.
@@ -1527,7 +1529,7 @@ function db2_fetch_array ($stmt, $row_number = null) {}
  * parameter results in a PHP warning if the result set uses a
  * forward-only cursor.
  * </p>
- * @return array an associative array with column values indexed by both the column
+ * @return array|false an associative array with column values indexed by both the column
  * name and 0-indexed column number. The array represents the next or
  * requested row in the result set. Returns false if there are no rows left
  * in the result set, or if the row requested by
@@ -1599,12 +1601,12 @@ function db2_setoption () {}
  * parameter results in a PHP warning if the result set uses a
  * forward-only cursor.
  * </p>
- * @return object an object representing a single row in the result set. The
+ * @return object|false an object representing a single row in the result set. The
  * properties of the object map to the names of the columns in the result set.
  * </p>
  * <p>
  * The IBM DB2, Cloudscape, and Apache Derby database servers typically fold
- * column names to upper-case, so the object properties will reflect that case. 
+ * column names to upper-case, so the object properties will reflect that case.
  * </p>
  * <p>
  * If your SELECT statement calls a scalar function to modify the value
@@ -1624,7 +1626,7 @@ function db2_fetch_object ($stmt, $row_number = null) {}
  * @param connection resource <p>
  * Specifies an active DB2 client connection.
  * </p>
- * @return object an object on a successful call. Returns false on failure.
+ * @return object|false an object on a successful call. Returns false on failure.
  */
 function db2_server_info ($connection) {}
 
@@ -1634,7 +1636,7 @@ function db2_server_info ($connection) {}
  * @param connection resource <p>
  * Specifies an active DB2 client connection.
  * </p>
- * @return object an object on a successful call. Returns false on failure.
+ * @return object|false an object on a successful call. Returns false on failure.
  */
 function db2_client_info ($connection) {}
 
@@ -1642,12 +1644,12 @@ function db2_client_info ($connection) {}
  * Used to escape certain characters
  * @link https://php.net/manual/en/function.db2-escape-string.php
  * @param string_literal string <p>
- * The string that contains special characters that need to be modified. 
- * Characters that are prepended with a backslash are \x00, 
- * \n, \r, \, 
+ * The string that contains special characters that need to be modified.
+ * Characters that are prepended with a backslash are \x00,
+ * \n, \r, \,
  * ', " and \x1a.
  * </p>
- * @return string string_literal with the special characters 
+ * @return string string_literal with the special characters
  * noted above prepended with backslashes.
  */
 function db2_escape_string ($string_literal) {}
@@ -1664,7 +1666,7 @@ function db2_escape_string ($string_literal) {}
  * @param length int <p>
  * The size of the LOB data to be retrieved from the stmt resource.
  * </p>
- * @return string the amount of data the user specifies. Returns
+ * @return string|false the amount of data the user specifies. Returns
  * false if the data cannot be retrieved.
  */
 function db2_lob_read ($stmt, $colnum, $length) {}
@@ -1679,35 +1681,35 @@ function db2_lob_read ($stmt, $colnum, $length) {}
  * db2_pconnect.
  * </p>
  * @param option string <p>
- * A valid statement or connection options. The following new options are available 
- * as of ibm_db2 version 1.6.0. They provide useful tracking information 
+ * A valid statement or connection options. The following new options are available
+ * as of ibm_db2 version 1.6.0. They provide useful tracking information
  * that can be set during execution with db2_get_option.
  * Note
  * <p>
  * Prior versions of ibm_db2 do not support these new options.
  * </p>
  * <p>
- * When the value in each option is being set, some servers might not handle 
+ * When the value in each option is being set, some servers might not handle
  * the entire length provided and might truncate the value.
  * </p>
  * <p>
- * To ensure that the data specified in each option is converted correctly 
- * when transmitted to a host system, use only the characters A through Z, 
+ * To ensure that the data specified in each option is converted correctly
+ * when transmitted to a host system, use only the characters A through Z,
  * 0 through 9, and the underscore (_) or period (.).
  * </p>
  * userid
  * <p>
- * SQL_ATTR_INFO_USERID - A pointer to a null-terminated 
- * character string used to identify the client user ID sent to the host 
+ * SQL_ATTR_INFO_USERID - A pointer to a null-terminated
+ * character string used to identify the client user ID sent to the host
  * database server when using DB2 Connect.
  * Note
  * <p>
- * DB2 for z/OS and OS/390 servers support up to a length of 16 characters. 
- * This user-id is not to be confused with the authentication user-id, it is for 
+ * DB2 for z/OS and OS/390 servers support up to a length of 16 characters.
+ * This user-id is not to be confused with the authentication user-id, it is for
  * identification purposes only and is not used for any authorization.
  * </p>
  * </p>
- * @return string the current setting of the connection attribute provided on success 
+ * @return string|false the current setting of the connection attribute provided on success
  * or false on failure.
  */
 function db2_get_option ($resource, $option) {}

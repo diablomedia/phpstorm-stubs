@@ -8,7 +8,7 @@
  *
  * @link https://php.net/manual/ru/class.rararchive.php
  */
-final class RarArchive implements Traversable
+final class RarArchive //implements Traversable
 {
     /**
      * Open RAR archive

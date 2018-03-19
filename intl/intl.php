@@ -1972,7 +1972,7 @@ class IntlDateFormatter {
     public function getErrorMessage() { }
 }
 
-class ResourceBundle implements Traversable {
+class ResourceBundle { //implements Traversable {
 
     /**
      * @param $locale
@@ -2861,7 +2861,7 @@ class IntlCalendar {
      * @param int $value The new value of the given field.
      * @return bool Returns <b>TRUE</b> on success and <b>FALSE</b> on failure.
      */
-    public function set($field, $value) { }
+    //public function set($field, $value) { }
 
     /**
      * (PHP 5 &gt;=5.5.0 PECL intl &gt;= 3.0.0a1)<br/>
@@ -2999,7 +2999,7 @@ class IntlIterator implements Iterator {
 }
 
 class IntlException extends Exception {
-    
+
 }
 
 class IntlTimeZone {
@@ -6103,7 +6103,7 @@ define ('IDNA_ERROR_BIDI', 2048);
 define ('IDNA_ERROR_CONTEXTJ', 4096);
 
 
-class IntlBreakIterator implements Traversable {
+class IntlBreakIterator { //implements Traversable {
     /* Constants */
     const  DONE = -1;
     const  WORD_NONE = 0;
@@ -6296,7 +6296,7 @@ class IntlBreakIterator implements Traversable {
     public function setText($text) { }
 }
 
-class IntlRuleBasedBreakIterator extends IntlBreakIterator implements Traversable {
+class IntlRuleBasedBreakIterator extends IntlBreakIterator { //implements Traversable {
 
     /* Methods */
     /**
@@ -6393,7 +6393,7 @@ class IntlRuleBasedBreakIterator extends IntlBreakIterator implements Traversabl
     public function getRuleStatusVec() { }
 }
 
-class IntlCodePointBreakIterator extends IntlBreakIterator implements Traversable {
+class IntlCodePointBreakIterator extends IntlBreakIterator { //implements Traversable {
 
 
     /**

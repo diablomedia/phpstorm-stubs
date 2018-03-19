@@ -590,3 +590,39 @@ final class RarException extends Exception
     {
     }
 }
+
+/**
+ * Open RAR archive
+ *
+ * @param string $filename Path to the Rar archive
+ * @param string $password A plain password, if needed to decrypt the headers. It will also be used by default if
+ *      encrypted files are found. Note that the files may have different passwords in respect
+ *      to the headers and among them
+ * @param callable $volume_callback A function that receives one parameter – the path of the volume that was
+ *      not found – and returns a string with the correct path for such volume or NULL if such volume does not
+ *      exist or is not known. The programmer should ensure the passed function doesn't cause loops as this
+ *      function is called repeatedly if the path returned in a previous call did not correspond to the needed
+ *      volume. Specifying this parameter omits the notice that would otherwise be emitted whenever a volume is
+ *      not found; an implementation that only returns NULL can therefore be used to merely omit such notices
+ *
+ * @link http://php.net/manual/en/rararchive.open.php
+ *
+ * @return RarArchive|false the requested RarArchive instance or FALSE on failure.
+ */
+function rar_open($filename, $password = null, callable $volume_callback = null) {}
+
+/**
+ * Get full list of entries from the RAR archive
+ * @param RarArchive $rarfile A RarArchive object, opened with rar_open().
+ * @return RarEntry[]|false array of {@see RarEntry} objects or FALSE on failure
+ */
+function rar_list(RarArchive $rarfile) {}
+
+/**
+ * Close RAR archive and free all resources
+ *
+ * @link http://php.net/manual/en/rararchive.close.php
+ * @param RarArchive $rarfile A RarArchive object, opened with rar_open().
+ * @return bool TRUE on success or FALSE on failure
+ */
+function rar_close(RarArchive $rarfile) {}

@@ -1855,5 +1855,8 @@ define ('DB2_CASE_LOWER', 1);
  */
 define ('DB2_CASE_UPPER', 2);
 
+define('DB2_I5_NAMING_ON', 1);
+define('DB2_I5_NAMING_OFF', 0);
+
 // End of ibm_db2 v.1.6.0
 ?>

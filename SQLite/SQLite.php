@@ -520,7 +520,7 @@ final class SQLiteException extends RuntimeException  {
 	 * @return void
 	 * @since 5.1.0
 	 */
-	final private function __clone () {}
+	//final private function __clone () {}
 
 	/**
 	 * Construct the exception

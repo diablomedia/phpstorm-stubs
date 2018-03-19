@@ -215,3 +215,6 @@ function xcache_get_opcode_spec($opcode) {}
  * @return string
  */
 function xcache_is_autoglobal($name) {}
+
+define('XC_TYPE_VAR', 0);
+define('XC_TYPE_PHP', 1);

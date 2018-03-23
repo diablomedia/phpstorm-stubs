@@ -782,6 +782,7 @@ function sqlite_fetch_string ($result, $decode_binary) {}
  * (PHP 5, PECL sqlite &gt;= 1.0.0)<br/>
  * Fetches all rows from a result set as an array of arrays
  * @link https://php.net/manual/en/function.sqlite-fetch-all.php
+ * @param resource $result The SQLite result resource.
  * @param int $result_type [optional] &sqlite.result-type;
  * @param bool $decode_binary [optional] &sqlite.decode-bin;
  * @return array <p>an array of the remaining rows in a result set. If called right
@@ -793,7 +794,7 @@ function sqlite_fetch_string ($result, $decode_binary) {}
  * <p>The column names returned by <b>SQLITE_ASSOC</b> and <b>SQLITE_BOTH</b> will be case-folded according to the value of the
  * {@link https://php.net/manual/en/sqlite.configuration.php#ini.sqlite.assoc-case sqlite.assoc_case} configuration option.</p>
  */
-function sqlite_fetch_all ($result_type = null, $decode_binary = null) {}
+function sqlite_fetch_all ($result, $result_type = null, $decode_binary = null) {}
 
 /**
  * (PHP 5, PECL sqlite &gt;= 1.0.0)<br/>

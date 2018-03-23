@@ -443,8 +443,6 @@ class Memcached  {
 	const RES_IN_PROGRESS = 46;
 	const RES_MAXIMUM_RETURN = 49;
 
-	
-	
 	/**
 	 * <p>Failed to create network socket.</p>
 	 * @link https://php.net/manual/en/memcached.constants.php
@@ -498,7 +496,7 @@ class Memcached  {
 	 * @param $persistent_id [optional]
 	 * @param $callback [optional]
 	 */
-	public function __construct ($persistent_id = '', $on_new_object_cb = null) {}
+	public function __construct ($persistent_id = null, $on_new_object_cb = null) {}
 
 	/**
 	 * (PECL memcached &gt;= 0.1.0)<br/>
@@ -1251,7 +1249,7 @@ class Memcached  {
 	 * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
 	 */
 	public function setOptions (array $options) {}
-	
+
 	/**
 	 * (PECL memcached &gt;= 2.0.0)<br/>
 	 * Set the credentials to use for authentication

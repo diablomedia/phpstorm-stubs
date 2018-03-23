@@ -321,7 +321,7 @@ function wincache_ucache_exists($key) {}
  * operation in user cache was successful. If none of the keys in the key array finds a
  * match in the user cache an empty array will be returned.</p>
  */
-function wincache_ucache_get($key, &$success) {}
+function wincache_ucache_get($key, &$success = null) {}
 
 /**
  * (PHP 5.2+; PECL wincache &gt;= 1.1.0)<br/>
@@ -373,7 +373,7 @@ function wincache_ucache_inc($key, $inc_by = 1, &$success) {}
  * </ul></li>
  * </ul></p>
  */
-function wincache_ucache_info($summaryonly = false, $key) {}
+function wincache_ucache_info($summaryonly = false, $key = null) {}
 
 /**
  * (PHP 5.2+; PECL wincache &gt;= 1.1.0)<br/>

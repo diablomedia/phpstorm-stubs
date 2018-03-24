@@ -637,7 +637,7 @@ function zend_send_buffer($buffer, $mime_type, $custom_headers) {}
  * @param int $severity
  * @return void
  */
-function zend_monitor_custom_event($class, $text, $user_data, $severity) {}
+function zend_monitor_custom_event($class, $text, $user_data = null, $severity = null) {}
 
 class java {
     /**

@@ -820,7 +820,7 @@ final class mysqli_warning  {
  * Implements Traversable since 5.4
  * @link https://php.net/manual/en/class.mysqli-result.php
  */
-class mysqli_result implements Traversable  {
+class mysqli_result { //implements Traversable  {
 	/**
 	 * @var int
 	 */

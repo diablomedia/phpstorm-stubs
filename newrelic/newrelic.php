@@ -17,9 +17,9 @@
  * @link https://docs.newrelic.com/docs/agents/php-agent/configuration/php-agent-api#api-custom-param
  *
  * @param string                       $key
- * @param boolean|float|integer|string $value
+ * @param bool|float|integer|string $value
  *
- * @return boolean
+ * @return bool
  */
 function newrelic_add_custom_parameter($key, $value) {}
 
@@ -37,7 +37,7 @@ function newrelic_add_custom_parameter($key, $value) {}
  *
  * @param string $functionName
  *
- * @return boolean
+ * @return bool
  */
 function newrelic_add_custom_tracer($functionName) {}
 
@@ -49,7 +49,7 @@ function newrelic_add_custom_tracer($functionName) {}
  *
  * @link https://docs.newrelic.com/docs/agents/php-agent/configuration/php-agent-api#api-bg
  *
- * @param boolean $flag [optional]
+ * @param bool $flag [optional]
  *
  * @return void
  */
@@ -64,7 +64,7 @@ function newrelic_background_job($flag = true) {}
  *
  * @link https://docs.newrelic.com/docs/agents/php-agent/configuration/php-agent-api#api-capture-params
  *
- * @param boolean $enable [optional]
+ * @param bool $enable [optional]
  *
  * @return void
  */
@@ -90,7 +90,7 @@ function newrelic_capture_params($enable = true) {}
  * @param string $metricName
  * @param float  $value
  *
- * @return boolean
+ * @return bool
  */
 function newrelic_custom_metric($metricName, $value) {}
 
@@ -145,9 +145,9 @@ function newrelic_end_of_transaction() {}
  *
  * @link https://docs.newrelic.com/docs/agents/php-agent/configuration/php-agent-api#api-end-txn
  *
- * @param boolean $ignore [optional]
+ * @param bool $ignore [optional]
  *
- * @return boolean
+ * @return bool
  */
 function newrelic_end_transaction($ignore = false) {}
 
@@ -229,7 +229,7 @@ function newrelic_ignore_transaction() {}
  *
  * @param string $name
  *
- * @return boolean
+ * @return bool
  */
 function newrelic_name_transaction($name) {}
 
@@ -313,9 +313,9 @@ function newrelic_record_custom_event($name, array $attributes) {}
  *
  * @param string  $name
  * @param string  $license [optional] defaults to ini_get('newrelic.license')
- * @param boolean $xmit    [optional]
+ * @param bool $xmit    [optional]
  *
- * @return boolean
+ * @return bool
  */
 function newrelic_set_appname($name, $license = null, $xmit = false) {}
 
@@ -333,7 +333,7 @@ function newrelic_set_appname($name, $license = null, $xmit = false) {}
  * @param string $account
  * @param string $product
  *
- * @return boolean
+ * @return bool
  */
 function newrelic_set_user_attributes($user, $account, $product) {}
 
@@ -353,6 +353,101 @@ function newrelic_set_user_attributes($user, $account, $product) {}
  * @param string $appName
  * @param string $license [optional] defaults to ini_get('newrelic.license')
  *
- * @return boolean
+ * @return bool
  */
 function newrelic_start_transaction($appName, $license = null) {}
+
+/**
+ * Records a datastore segment.
+ *
+ * Records a datastore segment. Datastore segments appear in the Breakdown table and Databases tab of the Transactions
+ * page in the New Relic UI.
+ * This function allows an unsupported datastore to be instrumented in the same way as the PHP agent automatically
+ * instruments its supported datastores.
+ * 
+ * @since 7.5.0.199
+ * @see https://docs.newrelic.com/docs/agents/php-agent/php-agent-api/newrelic_record_datastore_segment
+ *
+ * @param callable $func The function that should be timed to create the datastore segment.
+ * @param array    $parameters An associative array of parameters describing the datastore call
+ * <p>The supported keys in the $parameters array are as follows:</p>
+ * <table>
+ * <tr valign="top">
+ * <th>Key</th>
+ * <th>Description</th>
+ * </tr>
+ * <tr valign="top">
+ * <td>product
+ * <p><em>string</em></p>
+ * </td>
+ * <td>Required. The name of the datastore product being used: for example, `MySQL` to indicate that the segment
+ * represents a query against a MySQL database.</td>
+ * </tr>
+ * <tr valign="top">
+ * <td>collection
+ * <p><em>string</em></p>
+ * </td>
+ * <td>Optional. The table or collection being used or queried against.</td>
+ * </tr>
+ * <tr valign="top">
+ * <td>operation
+ * <p><em>string</em></p>
+ * </td>
+ * <td>
+ * <p>Optional. The operation being performed: for example, `select` for an SQL SELECT query, or `set` for a Memcached
+ * set operation.</p>
+ * <p>While operations may be specified with any case, New Relic suggests using lowercase to better line up with the
+ * operation names used by the PHP agent's automated datastore instrumentation.</p>
+ * </td>
+ * </tr>
+ * <tr valign="top">
+ * <td>host
+ * <p><em>string</em></p>
+ * </td>
+ * <td>Optional. The datastore host name.</td>
+ * </tr>
+ * <tr valign="top">
+ * <td>portPathOrId
+ * <p><em>string</em></p>
+ * </td>
+ * <td>Optional. The port or socket used to connect to the datastore.</td>
+ * </tr>
+ * <tr valign="top">
+ * <td>databaseName
+ * <p><em>string</em></p>
+ * </td>
+ * <td>Optional. The database name or number in use.</td>
+ * </tr>
+ * <tr valign="top">
+ * <td>query
+ * <p><em>string</em></p>
+ * </td>
+ * <td>
+ * <p>Optional. The query that was sent to the server.</p>
+ * <p>For security reasons, this value is only used if you set `product` to a supported datastore. This allows the agent
+ * to correctly obfuscate the query. The supported product values (which are matched in a case insensitive manner) are:
+ * `MySQL`, `MSSQL`, `Oracle`, `Postgres`, `SQLite`, `Firebird`, `Sybase`, and `Informix`.</p>
+ * </td>
+ * </tr>
+ * <tr valign="top">
+ * <td>inputQueryLabel
+ * <p><em>string</em></p>
+ * </td>
+ * <td>Optional. The name of the ORM in use (for example: `Doctrine`).</td>
+ * </tr>
+ * <tr valign="top">
+ * <td>inputQuery
+ * <p><em>string</em></p>
+ * </td>
+ * <td>
+ * <p>Optional. The input query that was provided to the ORM.</p>
+ * <p>For security reasons, and as with the `query` parameter, this value will be ignored if the product is not
+ * a supported datastore.</p>
+ * <p></p>
+ * </td>
+ * </tr>
+ * </table>
+ *
+ * @return mixed|false The return value of $callback is returned. If an error occurs, false is returned, and
+ * an error at the E_WARNING level will be triggered
+ */

@@ -85,8 +85,10 @@ function mhash_count () {}
  */
 function mhash ($hash, $data, $key = null) {}
 
-
-define ('MHASH_CRC32', 0);
+/**
+ * @since 7.4
+ */
+define ('MHASH_CRC32C', 34);
 define ('MHASH_MD5', 1);
 define ('MHASH_SHA1', 2);
 define ('MHASH_HAVAL256', 3);
@@ -117,6 +119,3 @@ define ('MHASH_FNV1A32', 30);
 define ('MHASH_FNV164', 31);
 define ('MHASH_FNV1A64', 32);
 define ('MHASH_JOAAT', 33);
-
-// End of mhash v.1.0
-?>

@@ -15,7 +15,10 @@ class stdClass {
 interface iterable {}
 
 /**
- * Interface to detect if a class is traversable using &foreach;.
+ * Interface to detect if a class is traversable using foreach.
+ * Abstract base interface that cannot be implemented alone.
+ * Instead it must be implemented by either {@see IteratorAggregate} or {@see Iterator}.
+ *
  * @link https://php.net/manual/en/class.traversable.php
  */
 interface Traversable extends iterable {
@@ -32,7 +35,8 @@ interface IteratorAggregate extends Traversable {
      * @link https://php.net/manual/en/iteratoraggregate.getiterator.php
      * @return Traversable An instance of an object implementing <b>Iterator</b> or
      * <b>Traversable</b>
-     * @since 5.0.0
+     * @throws Exception on failure.
+     * @since 5.0
      */
     public function getIterator();
 }
@@ -48,7 +52,7 @@ interface Iterator extends Traversable {
      * Return the current element
      * @link https://php.net/manual/en/iterator.current.php
      * @return mixed Can return any type.
-     * @since 5.0.0
+     * @since 5.0
      */
     public function current();
 
@@ -56,24 +60,24 @@ interface Iterator extends Traversable {
      * Move forward to next element
      * @link https://php.net/manual/en/iterator.next.php
      * @return void Any returned value is ignored.
-     * @since 5.0.0
+     * @since 5.0
      */
     public function next();
 
     /**
      * Return the key of the current element
      * @link https://php.net/manual/en/iterator.key.php
-     * @return mixed scalar on success, or null on failure.
-     * @since 5.0.0
+     * @return string|float|int|bool|null scalar on success, or null on failure.
+     * @since 5.0
      */
     public function key();
 
     /**
      * Checks if current position is valid
      * @link https://php.net/manual/en/iterator.valid.php
-     * @return boolean The return value will be casted to boolean and then evaluated.
+     * @return bool The return value will be casted to boolean and then evaluated.
      * Returns true on success or false on failure.
-     * @since 5.0.0
+     * @since 5.0
      */
     public function valid();
 
@@ -81,7 +85,7 @@ interface Iterator extends Traversable {
      * Rewind the Iterator to the first element
      * @link https://php.net/manual/en/iterator.rewind.php
      * @return void Any returned value is ignored.
-     * @since 5.0.0
+     * @since 5.0
      */
     public function rewind();
 }
@@ -98,11 +102,11 @@ interface ArrayAccess {
      * @param mixed $offset <p>
      * An offset to check for.
      * </p>
-     * @return boolean true on success or false on failure.
+     * @return bool true on success or false on failure.
      * </p>
      * <p>
      * The return value will be casted to boolean if non-boolean was returned.
-     * @since 5.0.0
+     * @since 5.0
      */
     public function offsetExists($offset);
 
@@ -113,7 +117,7 @@ interface ArrayAccess {
      * The offset to retrieve.
      * </p>
      * @return mixed Can return all value types.
-     * @since 5.0.0
+     * @since 5.0
      */
     public function offsetGet($offset);
 
@@ -127,7 +131,7 @@ interface ArrayAccess {
      * The value to set.
      * </p>
      * @return void
-     * @since 5.0.0
+     * @since 5.0
      */
     public function offsetSet($offset, $value);
 
@@ -138,7 +142,7 @@ interface ArrayAccess {
      * The offset to unset.
      * </p>
      * @return void
-     * @since 5.0.0
+     * @since 5.0
      */
     public function offsetUnset($offset);
 }
@@ -153,7 +157,7 @@ interface Serializable {
      * String representation of object
      * @link https://php.net/manual/en/serializable.serialize.php
      * @return string the string representation of the object or null
-     * @since 5.1.0
+     * @since 5.1
      */
     public function serialize();
 
@@ -164,7 +168,7 @@ interface Serializable {
      * The string representation of the object.
      * </p>
      * @return void
-     * @since 5.1.0
+     * @since 5.1
      */
     public function unserialize($serialized);
 }
@@ -268,7 +272,7 @@ class Exception implements Throwable {
      * Tries to clone the Exception, which results in Fatal error.
      * @link https://php.net/manual/en/exception.clone.php
      * @return void
-     * @since 5.1.0
+     * @since 5.1
      */
     final private function __clone() { }
 
@@ -278,7 +282,7 @@ class Exception implements Throwable {
      * @param string $message [optional] The Exception message to throw.
      * @param int $code [optional] The Exception code.
      * @param Throwable $previous [optional] The previous throwable used for the exception chaining.
-     * @since 5.1.0
+     * @since 5.1
      */
     public function __construct($message = "", $code = 0, Throwable $previous = null) { }
 
@@ -286,7 +290,7 @@ class Exception implements Throwable {
      * Gets the Exception message
      * @link https://php.net/manual/en/exception.getmessage.php
      * @return string the Exception message as a string.
-     * @since 5.1.0
+     * @since 5.1
      */
     final public function getMessage() { }
 
@@ -297,7 +301,7 @@ class Exception implements Throwable {
      * <b>Exception</b> but possibly as other type in
      * <b>Exception</b> descendants (for example as
      * string in <b>PDOException</b>).
-     * @since 5.1.0
+     * @since 5.1
      */
     final public function getCode() { }
 
@@ -305,7 +309,7 @@ class Exception implements Throwable {
      * Gets the file in which the exception occurred
      * @link https://php.net/manual/en/exception.getfile.php
      * @return string the filename in which the exception was created.
-     * @since 5.1.0
+     * @since 5.1
      */
     final public function getFile() { }
 
@@ -313,7 +317,7 @@ class Exception implements Throwable {
      * Gets the line in which the exception occurred
      * @link https://php.net/manual/en/exception.getline.php
      * @return int the line number where the exception was created.
-     * @since 5.1.0
+     * @since 5.1
      */
     final public function getLine() { }
 
@@ -321,7 +325,7 @@ class Exception implements Throwable {
      * Gets the stack trace
      * @link https://php.net/manual/en/exception.gettrace.php
      * @return array the Exception stack trace as an array.
-     * @since 5.1.0
+     * @since 5.1
      */
     final public function getTrace() { }
 
@@ -330,7 +334,7 @@ class Exception implements Throwable {
      * @link https://php.net/manual/en/exception.getprevious.php
      * @return Exception the previous <b>Exception</b> if available
      * or null otherwise.
-     * @since 5.3.0
+     * @since 5.3
      */
     final public function getPrevious() { }
 
@@ -338,7 +342,7 @@ class Exception implements Throwable {
      * Gets the stack trace as a string
      * @link https://php.net/manual/en/exception.gettraceasstring.php
      * @return string the Exception stack trace as a string.
-     * @since 5.1.0
+     * @since 5.1
      */
     final public function getTraceAsString() { }
 
@@ -346,7 +350,7 @@ class Exception implements Throwable {
      * String representation of the exception
      * @link https://php.net/manual/en/exception.tostring.php
      * @return string the string representation of the exception.
-     * @since 5.1.0
+     * @since 5.1
      */
     public function __toString() { }
 
@@ -475,16 +479,7 @@ class TypeError extends Error {
  * @link https://php.net/manual/en/class.parseerror.php
  * @since 7.0
  */
-class ParseError extends Error {
-
-}
-
-/**
- * AssertionError is thrown when an assertion made via {@see assert()} fails.
- * @link https://php.net/manual/en/class.assertionerror.php
- * @since 7.0
- */
-class AssertionError extends Error {
+class ParseError extends CompileError {
 
 }
 
@@ -505,6 +500,15 @@ class ArgumentCountError extends TypeError {}
  * @since 7.0
  */
 class ArithmeticError extends Error {
+
+}
+
+/**
+ * Class CompileError
+ * @link https://secure.php.net/manual/en/class.compileerror.php
+ * @since 7.3
+ */
+class CompileError extends Error {
 
 }
 
@@ -535,15 +539,15 @@ class ErrorException extends Exception {
      * @param string $filename [optional] The filename where the exception is thrown.
      * @param int $lineno [optional] The line number where the exception is thrown.
      * @param Exception $previous [optional] The previous exception used for the exception chaining.
-     * @since 5.1.0
+     * @since 5.1
      */
-    public function __construct($message = "", $code = 0, $severity = 1, $filename = __FILE__, $lineno = __LINE__, $previous) { }
+    public function __construct($message = "", $code = 0, $severity = 1, $filename = __FILE__, $lineno = __LINE__, $previous = null) { }
 
     /**
      * Gets the exception severity
      * @link https://php.net/manual/en/errorexception.getseverity.php
      * @return int the severity level of the exception.
-     * @since 5.1.0
+     * @since 5.1
      */
     final public function getSeverity() { }
 }
@@ -555,14 +559,14 @@ class ErrorException extends Exception {
  * Starting with PHP 5.4, this class has methods that allow further control of the anonymous function after it has been created.
  * <p>Besides the methods listed here, this class also has an __invoke method.
  * This is for consistency with other classes that implement calling magic, as this method is not used for calling the function.
- * @link http://www.php.net/manual/en/class.closure.php
+ * @link https://secure.php.net/manual/en/class.closure.php
  */
 final class Closure {
 
     /**
      * This method exists only to disallow instantiation of the Closure class.
      * Objects of this class are created in the fashion described on the anonymous functions page.
-     * @link http://www.php.net/manual/en/closure.construct.php
+     * @link https://secure.php.net/manual/en/closure.construct.php
      */
     private function __construct() { }
 
@@ -571,13 +575,13 @@ final class Closure {
      * as this method is not used for calling the function.
      * @param mixed $_ [optional]
      * @return mixed
-     * @link http://www.php.net/manual/en/class.closure.php
+     * @link https://secure.php.net/manual/en/class.closure.php
      */
     public function __invoke(...$_) { }
 
     /**
      * Duplicates the closure with a new bound object and class scope
-     * @link http://www.php.net/manual/en/closure.bindto.php
+     * @link https://secure.php.net/manual/en/closure.bindto.php
      * @param object $newthis The object to which the given anonymous function should be bound, or NULL for the closure to be unbound.
      * @param mixed $newscope The class scope to which associate the closure is to be associated, or 'static' to keep the current one.
      * If an object is given, the type of the object will be used instead.
@@ -590,7 +594,7 @@ final class Closure {
      * This method is a static version of Closure::bindTo().
      * See the documentation of that method for more information.
      * @static
-     * @link http://www.php.net/manual/en/closure.bind.php
+     * @link https://secure.php.net/manual/en/closure.bind.php
      * @param Closure $closure The anonymous functions to bind.
      * @param object $newthis The object to which the given anonymous function should be bound, or NULL for the closure to be unbound.
      * @param mixed $newscope The class scope to which associate the closure is to be associated, or 'static' to keep the current one.
@@ -608,7 +612,7 @@ final class Closure {
      * @return mixed
      * @since 7.0
      */
-    function call ($newThis, ...$parameters) {}
+    function call ($newthis, ...$parameters) {}
     
     /**
      * @param callable $callable
@@ -632,7 +636,40 @@ interface Countable {
      * </p>
      * <p>
      * The return value is cast to an integer.
-     * @since 5.1.0
+     * @since 5.1
      */
     public function count();
+}
+
+/**
+ * Weak references allow the programmer to retain a reference to an
+ * object which does not prevent the object from being destroyed.
+ * They are useful for implementing cache like structures.
+ * @link https://www.php.net/manual/en/class.weakreference.php
+ */
+class WeakReference {
+    /**
+     * This method exists only to disallow instantiation of the WeakReference
+     * class. Weak references are to be instantiated with the factory method
+     * <b>WeakReference::create()</b>.
+     */
+    public function __construct() {}
+
+    /**
+     * Create a new weak reference.
+     * @link https://www.php.net/manual/en/weakreference.create.php
+     * @param object $referent The object to be weakly referenced.
+     * @return WeakReference the freshly instantiated object.
+     * @since 7.4.0
+     */
+    public static function create(object $referent): WeakReference {}
+
+    /**
+     * Gets a weakly referenced object. If the object has already been
+     * destroyed, NULL is returned.
+     * @link https://www.php.net/manual/en/weakreference.get.php
+     * @return object|null
+     * @since 7.4.0
+     */
+    public function get(): ?object {}
 }

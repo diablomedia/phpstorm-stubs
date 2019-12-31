@@ -25,7 +25,7 @@ class XSLTProcessor  {
 	 * @param DOMNode $doc <p>
 	 * The node to be transformed.
 	 * </p>
-	 * @return DOMDocument The resulting <b>DOMDocument</b> or <b>FALSE</b> on error.
+	 * @return DOMDocument|false The resulting <b>DOMDocument</b> or <b>FALSE</b> on error.
 	 * @since 5.0
 	 */
 	public function transformToDoc (DOMNode $doc) {}
@@ -39,7 +39,7 @@ class XSLTProcessor  {
 	 * @param string $uri <p>
 	 * The target URI for the transformation.
 	 * </p>
-	 * @return int the number of bytes written or <b>FALSE</b> if an error occurred.
+	 * @return int|false the number of bytes written or <b>FALSE</b> if an error occurred.
 	 * @since 5.0
 	 */
 	public function transformToUri ($doc, $uri) {}
@@ -50,7 +50,7 @@ class XSLTProcessor  {
 	 * @param DOMDocument|SimpleXMLElement $doc <p>
 	 * The transformed document.
 	 * </p>
-	 * @return string The result of the transformation as a string or <b>FALSE</b> on error.
+	 * @return string|false The result of the transformation as a string or <b>FALSE</b> on error.
 	 * @since 5.0
 	 */
 	public function transformToXml ($doc) {}
@@ -81,7 +81,7 @@ class XSLTProcessor  {
 	 * @param string $localName <p>
 	 * The local name of the XSLT parameter.
 	 * </p>
-	 * @return string The value of the parameter (as a string), or <b>FALSE</b> if it's not set.
+	 * @return string|false The value of the parameter (as a string), or <b>FALSE</b> if it's not set.
 	 * @since 5.0
 	 */
 	public function getParameter ($namespaceURI, $localName) {}
@@ -131,7 +131,7 @@ class XSLTProcessor  {
 	 * Path to the file to dump profiling information.
 	 * </p>
 	 * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
-	 * @since 5.3.0
+	 * @since 5.3
 	 */
 	public function setProfiling ($filename) {}
 
@@ -140,7 +140,7 @@ class XSLTProcessor  {
 	 * @link https://php.net/manual/en/xsltprocessor.setsecurityprefs.php
 	 * @param int $securityPrefs
 	 * @return int
-	 * @since 5.4.0
+	 * @since 5.4
 	 */
 	public function setSecurityPrefs ($securityPrefs) {}
 
@@ -148,7 +148,7 @@ class XSLTProcessor  {
 	 * Get security preferences
 	 * @link https://php.net/manual/en/xsltprocessor.getsecurityprefs.php
 	 * @return int
-	 * @since 5.4.0
+	 * @since 5.4
 	 */
 	public function getSecurityPrefs () {}
 

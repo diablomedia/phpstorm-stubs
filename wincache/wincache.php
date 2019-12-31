@@ -1,7 +1,7 @@
 <?php
 /**
  * Stubs for WinCache extension by Microsoft (v1.1.0)
- * @link http://www.php.net/manual/en/book.wincache.php
+ * @link https://secure.php.net/manual/en/book.wincache.php
  * Windows Cache Extension for PHP is a PHP accelerator that is used to increase
  * the speed of PHP applications running on Windows and Windows Server.
  * Requirements:
@@ -17,11 +17,11 @@
 /**
  * (PHP 5.2+; PECL wincache &gt;= 1.0.0)<br/>
  * Retrieves information about files cached in the file cache
- * @link http://www.php.net/manual/en/function.wincache-fcache-fileinfo.php
+ * @link https://secure.php.net/manual/en/function.wincache-fcache-fileinfo.php
  * @param bool $summaryonly [optional]
  * <p>Controls whether the returned array will contain information about individual
  * cache entries along with the file cache summary.</p>
- * @return array Array of meta data about file cache or FALSE on failure
+ * @return array|false Array of meta data about file cache or FALSE on failure
  * <p>The array returned by this function contains the following elements:
  * <ul>
  * <li><em>total_cache_uptime</em> - total time in seconds that the file cache has been active</li>
@@ -44,8 +44,8 @@ function wincache_fcache_fileinfo($summaryonly = false) {}
 /**
  * (PHP 5.2+; PECL wincache &gt;= 1.0.0)<br/>
  * Retrieves information about memory usage by file cache.
- * @link http://www.php.net/manual/en/function.wincache-fcache-meminfo.php
- * @return array Array of meta data about file cache memory usage or FALSE on failure
+ * @link https://secure.php.net/manual/en/function.wincache-fcache-meminfo.php
+ * @return array|false Array of meta data about file cache memory usage or FALSE on failure
  * <p>The array returned by this function contains the following elements:
  * <ul>
  * <li><em>memory_total</em> - amount of memory in bytes allocated for the file cache</li>
@@ -64,24 +64,24 @@ function wincache_fcache_meminfo() {}
  * obtained. Once the lock is obtained, the other scripts that try to request the
  * lock by using the same key will be blocked, until the current script releases
  * the lock by using wincache_unlock().</p>
- * @link http://www.php.net/manual/en/function.wincache-lock.php
+ * @link https://secure.php.net/manual/en/function.wincache-lock.php
  * @param string $key Name of the key in the cache to get the lock on.
  * @param bool $isglobal [optional]
  * <p>Controls whether the scope of the lock is system-wide or local. Local locks
  * are scoped to the application pool in IIS FastCGI case or to all php processes
  * that have the same parent process identifier. </p>
- * @return boolean Returns TRUE on success or FALSE on failure.
+ * @return bool Returns TRUE on success or FALSE on failure.
  */
 function wincache_lock($key, $isglobal = false) {}
 
 /**
  * (PHP 5.2+; PECL wincache &gt;= 1.0.0)<br/>
  * Retrieves information about opcode cache content and its usage
- * @link http://www.php.net/manual/en/function.wincache-ocache-fileinfo.php
+ * @link https://secure.php.net/manual/en/function.wincache-ocache-fileinfo.php
  * @param bool $summaryonly [optional]
  * <p>Controls whether the returned array will contain information about individual
  * cache entries along with the opcode cache summary.</p>
- * @return array Array of meta data about opcode cache or FALSE on failure
+ * @return array|false Array of meta data about opcode cache or FALSE on failure
  * <p>The array returned by this function contains the following elements:
  * <ul>
  * <li><em>total_cache_uptime</em> - total time in seconds that the opcode cache has been active</li>
@@ -107,8 +107,8 @@ function wincache_ocache_fileinfo($summaryonly = false) {}
 /**
  * (PHP 5.2+; PECL wincache &gt;= 1.0.0)<br/>
  * Retrieves information about memory usage by opcode cache.
- * @link http://www.php.net/manual/en/function.wincache-ocache-meminfo.php
- * @return array Array of meta data about opcode cache memory usage or FALSE on failure
+ * @link https://secure.php.net/manual/en/function.wincache-ocache-meminfo.php
+ * @return array|false Array of meta data about opcode cache memory usage or FALSE on failure
  * <p>The array returned by this function contains the following elements:
  * <ul>
  * <li><em>memory_total</em> - amount of memory in bytes allocated for the opcode cache</li>
@@ -124,11 +124,11 @@ function wincache_ocache_meminfo() {}
  * (PHP 5.2+; PECL wincache &gt;= 1.0.0)<br/>
  * Refreshes the cache entries for the files, whose names were passed in the input argument.
  * <p>If no argument is specified then refreshes all the entries in the cache.</p>
- * @link http://www.php.net/manual/en/function.wincache-refresh-if-changed.php
+ * @link https://secure.php.net/manual/en/function.wincache-refresh-if-changed.php
  * @param array $files [optional]
  * <p>An array of file names for files that need to be refreshed. An absolute
  * or relative file paths can be used.</p>
- * @return boolean Returns TRUE on success or FALSE on failure.
+ * @return bool Returns TRUE on success or FALSE on failure.
  */
 function wincache_refresh_if_changed(array $files) {}
 
@@ -136,8 +136,8 @@ function wincache_refresh_if_changed(array $files) {}
  * (PHP 5.2+; PECL wincache &gt;= 1.0.0)<br/>
  * Retrieves information about cached mappings between relative file paths and
  * corresponding absolute file paths.
- * @link http://www.php.net/manual/en/function.wincache-rplist-fileinfo.php
- * @return array Array of meta data about the resolve file path cache or FALSE on failure
+ * @link https://secure.php.net/manual/en/function.wincache-rplist-fileinfo.php
+ * @return array|false Array of meta data about the resolve file path cache or FALSE on failure
  * <p>The array returned by this function contains the following elements:
  * <ul>
  * <li><em>total_file_count</em> - total number of file path mappings stored in the cache</li>
@@ -153,8 +153,8 @@ function wincache_rplist_fileinfo() {}
 /**
  * (PHP 5.2+; PECL wincache &gt;= 1.0.0)<br/>
  * Retrieves information about memory usage by resolve file path cache.
- * @link http://www.php.net/manual/en/function.wincache-rplist-meminfo.php
- * @return array Array of meta data that describes memory usage by resolve file path cache. or FALSE on failure
+ * @link https://secure.php.net/manual/en/function.wincache-rplist-meminfo.php
+ * @return array|false Array of meta data that describes memory usage by resolve file path cache. or FALSE on failure
  * <p>The array returned by this function contains the following elements:
  * <ul>
  * <li><em>memory_total</em> - amount of memory in bytes allocated for the resolve file path cache</li>
@@ -169,11 +169,11 @@ function wincache_rplist_meminfo() {}
 /**
  * (PHP 5.2+; PECL wincache &gt;= 1.1.0)<br/>
  * Retrieves information about session cache content and its usage.
- * @link http://www.php.net/manual/en/function.wincache-scache-info.php
+ * @link https://secure.php.net/manual/en/function.wincache-scache-info.php
  * @param bool $summaryonly [optional]
  * <p>Controls whether the returned array will contain information about individual
  * cache entries along with the session cache summary.</p>
- * @return array Array of meta data about session cache or FALSE on failure
+ * @return array|false Array of meta data about session cache or FALSE on failure
  * <p>The array returned by this function contains the following elements:
  * <ul>
  * <li><em>total_cache_uptime</em> - total time in seconds that the session cache has been active</li>
@@ -199,8 +199,8 @@ function wincache_scache_info($summaryonly = false) {}
 /**
  * (PHP 5.2+; PECL wincache &gt;= 1.1.0)<br/>
  * Retrieves information about memory usage by session cache.
- * @link http://www.php.net/manual/en/function.wincache-scache-meminfo.php
- * @return array Array of meta data about session cache memory usage or FALSE on failure
+ * @link https://secure.php.net/manual/en/function.wincache-scache-meminfo.php
+ * @return array|false Array of meta data about session cache memory usage or FALSE on failure
  * <p>The array returned by this function contains the following elements:
  * <ul>
  * <li><em>memory_total</em> - amount of memory in bytes allocated for the session cache</li>
@@ -217,7 +217,7 @@ function wincache_scache_meminfo() {}
  * Adds a variable in user cache, only if this variable doesn't already exist in the cache.
  * <p>The added variable remains in the user cache unless its time to live expires
  * or it is deleted by using wincache_ucache_delete() or wincache_ucache_clear() functions.</p>
- * @link http://www.php.net/manual/en/function.wincache-ucache-add.php
+ * @link https://secure.php.net/manual/en/function.wincache-ucache-add.php
  * @param mixed $key <p>Store the variable using this key name. If a variable with
  * same key is already present the function will fail and return FALSE. key is case
  * sensitive. To override the value even if key is present use wincache_ucache_set()
@@ -234,7 +234,7 @@ function wincache_scache_meminfo() {}
  * cache. This parameter takes a default value of 0 which means the variable
  * will stay in the cache unless explicitly deleted by using wincache_ucache_delete()
  * or wincache_ucache_clear() functions.</p>
- * @return boolean If key is string, the function returns TRUE on success and FALSE on failure.
+ * @return bool If key is string, the function returns TRUE on success and FALSE on failure.
  * <p>If key is an array, the function returns:
  * <ul>
  * <li>If all the name =&gt; value pairs in the array can be set, function returns an empty array;</li>
@@ -249,28 +249,28 @@ function wincache_ucache_add($key, $value, $ttl = 0) {}
  * (PHP 5.2+; PECL wincache &gt;= 1.1.0)<br/>
  * Compares the variable associated with the <em>key</em> with <em>old_value</em>
  * and if it matches then assigns the <em>new_value</em> to it.
- * @link http://www.php.net/manual/en/function.wincache-ucache-cas.php
+ * @link https://secure.php.net/manual/en/function.wincache-ucache-cas.php
  * @param string $key The key that is used to store the variable in the cache. key is case sensitive.
  * @param int $old_value Old value of the variable pointed by key in the user cache.
  * The value should be of type long, otherwise the function returns FALSE.
  * @param int $new_value New value which will get assigned to variable pointer by key
  * if a match is found. The value should be of type long, otherwise the function returns FALSE.
- * @return boolean Returns TRUE on success or FALSE on failure.
+ * @return bool Returns TRUE on success or FALSE on failure.
  */
 function wincache_ucache_cas($key, $old_value, $new_value) {}
 
 /**
  * (PHP 5.2+; PECL wincache &gt;= 1.1.0)<br/>
  * Clears/deletes all the values stored in the user cache.
- * @link http://www.php.net/manual/en/function.wincache-ucache-clear.php
- * @return boolean Returns TRUE on success or FALSE on failure.
+ * @link https://secure.php.net/manual/en/function.wincache-ucache-clear.php
+ * @return bool Returns TRUE on success or FALSE on failure.
  */
 function wincache_ucache_clear() {}
 
 /**
  * (PHP 5.2+; PECL wincache &gt;= 1.1.0)<br/>
  * Decrements the value associated with the key by 1 or as specified by dec_by.
- * @link http://www.php.net/manual/en/function.wincache-ucache-dec.php
+ * @link https://secure.php.net/manual/en/function.wincache-ucache-dec.php
  * @param string $key <p>The key that was used to store the variable in the cache.
  * key is case sensitive.</p>
  * @param int $dec_by <p>The value by which the variable associated with the key will
@@ -279,17 +279,17 @@ function wincache_ucache_clear() {}
  * otherwise the function fails and returns FALSE.</p>
  * @param bool $success [optional]
  * <p>Will be set to TRUE on success and FALSE on failure.</p>
- * @return int Returns the decremented value on success and FALSE on failure.
+ * @return int|false Returns the decremented value on success and FALSE on failure.
  */
 function wincache_ucache_dec($key, $dec_by = 1, &$success) {}
 
 /**
  * (PHP 5.2+; PECL wincache &gt;= 1.1.0)<br/>
  * Deletes the elements in the user cache pointed by key.
- * @link http://www.php.net/manual/en/function.wincache-ucache-delete.php
+ * @link https://secure.php.net/manual/en/function.wincache-ucache-delete.php
  * @param mixed $key <p>The key that was used to store the variable in the cache.
  * key is case sensitive. key can be an array of keys.</p>
- * @return boolean Returns TRUE on success or FALSE on failure.
+ * @return bool Returns TRUE on success or FALSE on failure.
  * <p>If key is an array then the function returns FALSE if every element of
  * the array fails to get deleted from the user cache, otherwise returns an
  * array which consists of all the keys that are deleted.</p>
@@ -299,16 +299,16 @@ function wincache_ucache_delete($key) {}
 /**
  * (PHP 5.2+; PECL wincache &gt;= 1.1.0)<br/>
  * Checks if a variable with the key exists in the user cache or not.
- * @link http://www.php.net/manual/en/function.wincache-ucache-exists.php
+ * @link https://secure.php.net/manual/en/function.wincache-ucache-exists.php
  * @param string $key The key that was used to store the variable in the cache. key is case sensitive.
- * @return boolean Returns TRUE if variable with the key exitsts, otherwise returns FALSE.
+ * @return bool Returns TRUE if variable with the key exitsts, otherwise returns FALSE.
  */
 function wincache_ucache_exists($key) {}
 
 /**
  * (PHP 5.2+; PECL wincache &gt;= 1.1.0)<br/>
  * Gets a variable stored in the user cache.
- * @link http://www.php.net/manual/en/function.wincache-ucache-get.php
+ * @link https://secure.php.net/manual/en/function.wincache-ucache-get.php
  * @param mixed $key <p>The key that was used to store the variable in the cache.
  * key is case sensitive. key can be an array of keys. In this case the return
  * value will be an array of values of each element in the key array.</p>
@@ -326,7 +326,7 @@ function wincache_ucache_get($key, &$success = null) {}
 /**
  * (PHP 5.2+; PECL wincache &gt;= 1.1.0)<br/>
  * Increments the value associated with the key by 1 or as specified by inc_by.
- * @link http://www.php.net/manual/en/function.wincache-ucache-inc.php
+ * @link https://secure.php.net/manual/en/function.wincache-ucache-inc.php
  * @param string $key <p>The key that was used to store the variable in the cache.
  * key is case sensitive.</p>
  * @param int $inc_by <p>The value by which the variable associated with the key will
@@ -335,14 +335,14 @@ function wincache_ucache_get($key, &$success = null) {}
  * otherwise the function fails and returns FALSE.</p>
  * @param bool $success [optional]
  * <p>Will be set to TRUE on success and FALSE on failure.</p>
- * @return int Returns the incremented value on success and FALSE on failure.
+ * @return int|false Returns the incremented value on success and FALSE on failure.
  */
 function wincache_ucache_inc($key, $inc_by = 1, &$success) {}
 
 /**
  * (PHP 5.2+; PECL wincache &gt;= 1.1.0)<br/>
  * Retrieves information about data stored in the user cache.
- * @link http://www.php.net/manual/en/function.wincache-ucache-info.php
+ * @link https://secure.php.net/manual/en/function.wincache-ucache-info.php
  * @param bool $summaryonly [optional]
  * <p>Controls whether the returned array will contain information about
  * individual cache entries along with the user cache summary.</p>
@@ -351,7 +351,7 @@ function wincache_ucache_inc($key, $inc_by = 1, &$success) {}
  * will contain information only about that cache entry. If not specified and
  * summaryonly is set to false then the returned array will contain information
  * about all entries in the cache.</p>
- * @return array Array of meta data about user cache or FALSE on failure
+ * @return array|false Array of meta data about user cache or FALSE on failure
  * <p>The array returned by this function contains the following elements:
  * <ul>
  * <li><em>total_cache_uptime</em> - total time in seconds that the user cache has been active</li>
@@ -378,8 +378,8 @@ function wincache_ucache_info($summaryonly = false, $key = null) {}
 /**
  * (PHP 5.2+; PECL wincache &gt;= 1.1.0)<br/>
  * Retrieves information about memory usage by user cache.
- * @link http://www.php.net/manual/en/function.wincache-ucache-meminfo.php
- * @return array Array of meta data about user cache memory usage or FALSE on failure
+ * @link https://secure.php.net/manual/en/function.wincache-ucache-meminfo.php
+ * @return array|false Array of meta data about user cache memory usage or FALSE on failure
  * <p>The array returned by this function contains the following elements:
  * <ul>
  * <li><em>memory_total</em> - amount of memory in bytes allocated for the user cache</li>
@@ -397,7 +397,7 @@ function wincache_ucache_meminfo() {}
  * <p>The added or updated variable remains in the user cache unless its time to
  * live expires or it is deleted by using wincache_ucache_delete() or
  * wincache_ucache_clear() functions.</p>
- * @link http://www.php.net/manual/en/function.wincache-ucache-set.php
+ * @link https://secure.php.net/manual/en/function.wincache-ucache-set.php
  * @param mixed $key <p>
  * Store the variable using this key name. If a variable with same key is already
  * present the function will overwrite the previous value with the new one. key
@@ -414,7 +414,7 @@ function wincache_ucache_meminfo() {}
  * parameter takes a default value of 0 which means the variable will stay in the
  * cache unless explicitly deleted by using wincache_ucache_delete() or
  * wincache_ucache_clear() functions.</p>
- * @return boolean <p>
+ * @return bool <p>
  * If key is string, the function returns TRUE on success and FALSE on failure.</p>
  * <p>If key is an array, the function returns:
  * <ul style="list-style: square;">
@@ -432,9 +432,9 @@ function wincache_ucache_set($key, $value, $ttl = 0) {}
  * (PHP 5.2+; PECL wincache &gt;= 1.1.0)<br/>
  * Releases an exclusive lock that was obtained on a given key by using wincache_lock().
  * <p>If any other process was blocked waiting for the lock on this key, that process will be able to obtain the lock.</p>
- * @link http://www.php.net/manual/en/function.wincache-unlock.php
+ * @link https://secure.php.net/manual/en/function.wincache-unlock.php
  * @param string $key Name of the key in the cache to release the lock on.
- * @return boolean Returns TRUE on success or FALSE on failure.
+ * @return bool Returns TRUE on success or FALSE on failure.
  */
 function wincache_unlock($key) {}
 ?>

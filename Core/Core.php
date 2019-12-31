@@ -152,7 +152,7 @@ function strncasecmp ($str1, $str2, $len) {}
  * false.
  * @since 4.0
  * @since 5.0
- * @deprecated 7.2
+ * @deprecated 7.2 Use a foreach loop instead.
  */
 function each (array &$array) {}
 
@@ -243,7 +243,7 @@ function each (array &$array) {}
  * </td>
  * </tr>
  * <tr valign="top">
- * <td>6143</td>
+ * <td>32767</td>
  * <td>
  * E_ALL
  * </td>
@@ -345,7 +345,7 @@ function get_class ($object = null) {}
  * the "Late Static Binding" class name
  * @link https://php.net/manual/en/function.get-called-class.php
  * @return string the class name. Returns false if called from outside a class.
- * @since 5.3.0
+ * @since 5.3
  */
 function get_called_class () {}
 
@@ -396,7 +396,7 @@ function method_exists ($object, $method_name) {}
  * </p>
  * @return bool true if the property exists, false if it doesn't exist or
  * null in case of an error.
- * @since 5.1.0
+ * @since 5.1
  */
 function property_exists ($class, $property) {}
 
@@ -404,9 +404,9 @@ function property_exists ($class, $property) {}
  * Checks if the trait exists
  * @param string $traitname Name of the trait to check
  * @param bool $autoload [optional] Whether to autoload if not already loaded.
- * @return boolean Returns TRUE if trait exists, FALSE if not, NULL in case of an error.
- * @link http://www.php.net/manual/en/function.trait-exists.php
- * @since 5.4.0
+ * @return bool Returns TRUE if trait exists, FALSE if not, NULL in case of an error.
+ * @link https://secure.php.net/manual/en/function.trait-exists.php
+ * @since 5.4
  */
 function trait_exists($traitname, $autoload ) {}
 
@@ -465,7 +465,7 @@ function function_exists ($function_name) {}
  * @param string $alias The alias name for the class.
  * @param bool $autoload [optional] Whether to autoload if the original class is not found.
  * @return bool true on success or false on failure.
- * @since 5.3.0
+ * @since 5.3
  */
 function class_alias ($original, $alias, $autoload = TRUE) {}
 
@@ -558,7 +558,7 @@ function get_class_vars ($class_name) {}
  * @param object $object <p>
  * An object instance.
  * </p>
- * @return array an associative array of defined object accessible non-static properties 
+ * @return array an associative array of defined object accessible non-static properties
  * for the specified <i>object</i> in scope. If a property have
  * not been assigned a value, it will be returned with a null value.
  * @since 4.0
@@ -606,12 +606,12 @@ function trigger_error ($error_msg, $error_type = E_USER_NOTICE) {}
  * @since 4.0
  * @since 5.0
  */
-function user_error ($message, $error_type) {}
+function user_error ($message, $error_type = E_USER_NOTICE) {}
 
 /**
  * Sets a user-defined error handler function
  * @link https://php.net/manual/en/function.set-error-handler.php
- * @param callable $error_handler <p>
+ * @param callable|null $error_handler <p>
  * The user function needs to accept two parameters: the error code, and a
  * string describing the error. Then there are three optional parameters 
  * that may be supplied: the filename in which the error occurred, the
@@ -636,7 +636,7 @@ function user_error ($message, $error_type) {}
  * <i>error_handler</i> will be called for every error
  * regardless to the setting of the error_reporting setting.
  * </p>
- * @return mixed a string containing the previously defined error handler (if any). If
+ * @return callable|null a string containing the previously defined error handler (if any). If
  * the built-in error handler is used null is returned. null is also returned
  * in case of an error such as an invalid callback. If the previous error handler
  * was a class method, this function will return an indexed array with the class
@@ -709,9 +709,9 @@ function get_declared_interfaces () {}
 /**
  * Returns an array of all declared traits
  * @return array with names of all declared traits in values. Returns NULL in case of a failure.
- * @link http://www.php.net/manual/en/function.get-declared-traits.php
+ * @link https://secure.php.net/manual/en/function.get-declared-traits.php
  * @see class_uses()
- * @since 5.4.0
+ * @since 5.4
  */
 function get_declared_traits() {}
 
@@ -750,7 +750,7 @@ function get_defined_vars () {}
  * @return string a unique function name as a string, or false on error.
  * @since 4.0.1
  * @since 5.0
- * @deprecated 7.2
+ * @deprecated 7.2 Use anonymous functions instead.
  */
 function create_function ($args, $code) {}
 
@@ -831,7 +831,7 @@ function extension_loaded ($name) {}
  * <p>
  * This parameter must be in lowercase.
  * </p>
- * @return array an array with all the functions, or false if 
+ * @return array an array with all the functions, or false if
  * <i>module_name</i> is not a valid extension.
  * @since 4.0
  * @since 5.0
@@ -866,7 +866,11 @@ function get_extension_funcs ($module_name) {}
  * [E_USER_ERROR] => 256
  * [E_USER_WARNING] => 512
  * [E_USER_NOTICE] => 1024
- * [E_ALL] => 2047
+ * [E_STRICT] => 2048
+ * [E_RECOVERABLE_ERROR] => 4096
+ * [E_DEPRECATED] => 8192
+ * [E_USER_DEPRECATED] => 16384
+ * [E_ALL] => 32767
  * [TRUE] => 1
  * )
  * [pcre] => Array
@@ -887,7 +891,7 @@ function get_extension_funcs ($module_name) {}
  * </pre>
  * </p>
  * @return array 
- * @since 4.1.0
+ * @since 4.1
  * @since 5.0
  */
 function get_defined_constants ($categorize = false) {}
@@ -987,19 +991,10 @@ function get_defined_constants ($categorize = false) {}
  * </td>
  * </tr>
  * </table>
- * @since 4.3.0
+ * @since 4.3
  * @since 5.0
  */
 function debug_backtrace ($options = DEBUG_BACKTRACE_PROVIDE_OBJECT, $limit = 0) {}
-
-/**
- * Clear the most recent error
- * @link https://php.net/manual/en/function.error-clear-last.php
- * @since 7.0
- */
-function error_clear_last () {}
-const DEBUG_BACKTRACE_PROVIDE_OBJECT = 0;
-const DEBUG_BACKTRACE_IGNORE_ARGS = 0;
 
 /**
  * Prints a backtrace
@@ -1030,7 +1025,7 @@ function debug_print_backtrace ($options = 0, $limit = 0) {}
  * Forces collection of any existing garbage cycles
  * @link https://php.net/manual/en/function.gc-collect-cycles.php
  * @return int number of collected cycles.
- * @since 5.3.0
+ * @since 5.3
  */
 function gc_collect_cycles () {}
 
@@ -1038,7 +1033,7 @@ function gc_collect_cycles () {}
  * Returns status of the circular reference collector
  * @link https://php.net/manual/en/function.gc-enabled.php
  * @return bool true if the garbage collector is enabled, false otherwise.
- * @since 5.3.0
+ * @since 5.3
  */
 function gc_enabled () {}
 
@@ -1046,7 +1041,7 @@ function gc_enabled () {}
  * Activates the circular reference collector
  * @link https://php.net/manual/en/function.gc-enable.php
  * @return void 
- * @since 5.3.0
+ * @since 5.3
  */
 function gc_enable () {}
 
@@ -1054,75 +1049,35 @@ function gc_enable () {}
  * Deactivates the circular reference collector
  * @link https://php.net/manual/en/function.gc-disable.php
  * @return void 
- * @since 5.3.0
+ * @since 5.3
  */
 function gc_disable () {}
 
 /**
- * @param string $kind
- * @return int
- * @since 7.1
+ * @since 7.3
  */
-function sapi_windows_cp_get($kind) {
-
-}
+function gc_status () {}
 
 /**
- * @param int $cp
- * @return bool
- * @since 7.1
+ * Reclaims memory used by the Zend Engine memory manager
+ * @link https://php.net/manual/en/function.gc-mem-caches.php
+ * @return int Returns the number of bytes freed.
+ * @since 7.0
  */
-function sapi_windows_cp_set($cp) {
-
-}
+function gc_mem_caches () {}
 
 /**
- * @param int|string $in_codepage
- * @param int|string $out_codepage
- * @param string $subject
- * @return string
- * @since 7.1
- */
-function sapi_windows_cp_conv($in_codepage, $out_codepage, $subject) {}
-
-/**
- * @return bool
- * @since 7.1
- */
-function sapi_windows_cp_is_utf8() {
-
-}
-
-/**
- * true if a value is iterable and will be accepted by the iterable pseudo-type, false for other values.
- * @param mixed $value
- * @return true
- * @since 7.1
- * @link https://wiki.php.net/rfc/iterable
- */
-function is_iterable($value) {}
-
-/**
- * Encodes an ISO-8859-1 string to UTF-8
- * @link https://php.net/manual/en/function.utf8-encode.php
- * @param string $data <p>
- * An ISO-8859-1 string.
+ * Returns active resources
+ * @link https://php.net/manual/en/function.get-resources.php
+ * @param string $type [optional]<p>
+ *
+ * If defined, this will cause get_resources() to only return resources of the given type. A list of resource types is available.
+ *
+ * If the string Unknown is provided as the type, then only resources that are of an unknown type will be returned.
+ *
+ * If omitted, all resources will be returned.
  * </p>
- * @return string the UTF-8 translation of <i>data</i>.
- * @since 4.0
- * @since 5.0
+ * @return array Returns an array of currently active resources, indexed by resource number.
+ * @since 7.0
  */
-function utf8_encode ($data) {}
-
-/**
- * Converts a string with ISO-8859-1 characters encoded with UTF-8
- * @since 4.0
- * @since 5.0
-to single-byte ISO-8859-1
- * @link https://php.net/manual/en/function.utf8-decode.php
- * @param string $data <p>
- * An UTF-8 encoded string.
- * </p>
- * @return string the ISO-8859-1 translation of <i>data</i>.
- */
-function utf8_decode ($data) {}
+function get_resources ($type) {}

@@ -173,9 +173,21 @@
  * </tr>
  * </table>
  * </p>
- * @return resource a resource on success, or false on error.
+ * @return resource|false a resource on success, or false on error.
  */
 function ssh2_connect ($host, $port = null, array $methods = null , array $callbacks = null ) {}
+
+/**
+ * (PECL ssh2 &gt;= 1.0)<br/>
+ * Close a connection to a remote SSH server
+ * @link https://php.net/manual/en/function.ssh2-disconnect.php
+ * @param resource $session <p>
+ * An SSH connection link identifier, obtained from a call to
+ * ssh2_connect.
+ * </p>
+ * @return bool
+ */
+function ssh2_disconnect ($session) {}
 
 /**
  * (PECL ssh2 &gt;= 0.9.0)<br/>
@@ -354,7 +366,7 @@ function ssh2_shell ($session, $term_type = null, array $env = null , $width = n
  * SSH2_TERM_UNIT_CHARS or
  * SSH2_TERM_UNIT_PIXELS.
  * </p>
- * @return resource a stream on success or false on failure.
+ * @return resource|false a stream on success or false on failure.
  */
 function ssh2_exec ($session, $command, $pty = null, array $env = null , $width = null, $height = null, $width_height_type = null) {}
 

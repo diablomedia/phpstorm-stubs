@@ -140,7 +140,7 @@ class XMLReader  {
 	 * @param int $index <p>
 	 * The position of the attribute.
 	 * </p>
-	 * @return string|NULL The value of the attribute, or <b>NULL</b> if no attribute exists
+	 * @return string|null The value of the attribute, or <b>NULL</b> if no attribute exists
 	 * at <i>index</i> or not positioned of element.
 	 * @since 5.1.2
 	 */
@@ -155,7 +155,7 @@ class XMLReader  {
 	 * @param string $namespaceURI <p>
 	 * The namespace URI.
 	 * </p>
-	 * @return string|NULL The value of the attribute, or <b>NULL</b> if no attribute with the
+	 * @return string|null The value of the attribute, or <b>NULL</b> if no attribute with the
 	 * given <i>localName</i> and
 	 * <i>namespaceURI</i> is found or not positioned of element.
 	 * @since 5.1.2
@@ -296,7 +296,7 @@ class XMLReader  {
 	 * Retrieve XML from current node
 	 * @link https://php.net/manual/en/xmlreader.readinnerxml.php
 	 * @return string the contents of the current node as a string. Empty string on failure.
-	 * @since 5.2.0
+	 * @since 5.2
 	 */
 	public function readInnerXml () {}
 
@@ -304,7 +304,7 @@ class XMLReader  {
 	 * Retrieve XML from current node, including it self
 	 * @link https://php.net/manual/en/xmlreader.readouterxml.php
 	 * @return string the contents of current node, including itself, as a string. Empty string on failure.
-	 * @since 5.2.0
+	 * @since 5.2
 	 */
 	public function readOuterXml () {}
 
@@ -313,7 +313,7 @@ class XMLReader  {
 	 * @link https://php.net/manual/en/xmlreader.readstring.php
 	 * @return string the content of the current node as a string. Empty string on
 	 * failure.
-	 * @since 5.2.0
+	 * @since 5.2
 	 */
 	public function readString () {}
 
@@ -324,7 +324,7 @@ class XMLReader  {
 	 * The filename of the XSD schema.
 	 * </p>
 	 * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
-	 * @since 5.2.0
+	 * @since 5.2
 	 */
 	public function setSchema ($filename) {}
 
@@ -351,7 +351,7 @@ class XMLReader  {
 	 * filename or URI pointing to a RelaxNG Schema.
 	 * </p>
 	 * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
-	 * @since 5.2.0
+	 * @since 5.2
 	 */
 	public function setRelaxNGSchema ($filename) {}
 
@@ -389,7 +389,7 @@ class XMLReader  {
 	 * Returns a copy of the current node as a DOM object
 	 * @link https://php.net/manual/en/xmlreader.expand.php
 	 * @param DOMNode $basenode [optional]
-	 * @return DOMNode The resulting <b>DOMNode</b> or <b>FALSE</b> on error.
+	 * @return DOMNode|false The resulting <b>DOMNode</b> or <b>FALSE</b> on error.
 	 * @since 5.1.2
 	 */
 	public function expand (DOMNode $basenode = null) {}

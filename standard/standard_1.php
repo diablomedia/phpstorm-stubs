@@ -39,7 +39,7 @@ function strtolower ($str) {}
  * If specified, search will start this number of characters counted from
  * the beginning of the string. Unlike {@see strrpos()} and {@see strripos()}, the offset cannot be negative.
  * </p>
- * @return int|boolean <p>
+ * @return int|false <p>
  * Returns the position where the needle exists relative to the beginnning of
  * the <b>haystack</b> string (independent of search direction
  * or offset).
@@ -73,7 +73,7 @@ function strpos ($haystack, $needle, $offset = 0) {}
  * start searching. The position returned is still relative to the
  * beginning of haystack.
  * </p>
- * @return int If needle is not found,
+ * @return int|false If needle is not found,
  * stripos will return boolean false.
  * @since 5.0
  */
@@ -91,7 +91,7 @@ function stripos ($haystack, $needle, $offset = null) {}
  * @param int $offset [optional] <p>
  * If specified, search will start this number of characters counted from the beginning of the string. If the value is negative, search will instead start from that many characters from the end of the string, searching backwards.
  * </p>
- * @return int|boolean <p>
+ * @return int|false <p>
  * Returns the position where the needle exists relative to the beginning of
  * the <b>haystack</b> string (independent of search direction
  * or offset).
@@ -124,7 +124,7 @@ function strrpos ($haystack, $needle, $offset = 0) {}
  * offset characters from the
  * start of the string.
  * </p>
- * @return int the numerical position of the last occurrence of
+ * @return int|false the numerical position of the last occurrence of
  * needle. Also note that string positions start at 0,
  * and not 1.
  * </p>
@@ -175,6 +175,7 @@ function hebrev ($hebrew_text, $max_chars_per_line = null) {}
  * @return string the visual string.
  * @since 4.0
  * @since 5.0
+ * @deprecated 7.4
  */
 function hebrevc ($hebrew_text, $max_chars_per_line = null) {}
 
@@ -191,7 +192,7 @@ function hebrevc ($hebrew_text, $max_chars_per_line = null) {}
  * @since 4.0
  * @since 5.0
  */
-function nl2br ($string, $is_xhtml = null) {}
+function nl2br ($string, $is_xhtml = true) {}
 
 /**
  * Returns filename component of path
@@ -254,7 +255,7 @@ function dirname ($path, $levels = 1) {}
  * PATHINFO_FILENAME. It
  * defaults to return all elements.
  * </p>
- * @return mixed The following associative array elements are returned:
+ * @return string[]|string The following associative array elements are returned:
  * dirname, basename,
  * extension (if any), and filename.
  * </p>
@@ -308,7 +309,7 @@ function stripcslashes ($str) {}
  * the part of the haystack before the first
  * occurrence of the needle.
  * </p>
- * @return string the portion of string, or false if needle
+ * @return string|false the portion of string, or false if needle
  * is not found.
  * @since 4.0
  * @since 5.0
@@ -330,7 +331,7 @@ function strstr ($haystack, $needle, $before_needle = null) {}
  * returns the part of the haystack before the
  * first occurrence of the needle.
  * </p>
- * @return string the matched substring. If needle is not
+ * @return string|false the matched substring. If needle is not
  * found, returns false.
  * @since 4.0
  * @since 5.0
@@ -351,7 +352,7 @@ function stristr ($haystack, $needle, $before_needle = null) {}
  * If <b>needle</b> is not a string, it is converted to
  * an integer and applied as the ordinal value of a character.
  * </p>
- * @return string <p>
+ * @return string|false <p>
  * This function returns the portion of string, or <b>FALSE</b> if
  * <b>needle</b> is not found.
  * </p>
@@ -367,7 +368,7 @@ function strrchr ($haystack, $needle) {}
  * The input string.
  * </p>
  * @return string the shuffled string.
- * @since 4.3.0
+ * @since 4.3
  * @since 5.0
  */
 function str_shuffle ($str) {}
@@ -382,12 +383,13 @@ function str_shuffle ($str) {}
  * Specify the return value of this function. The current supported values
  * are:
  * 0 - returns the number of words found
+ * </p>
  * @param string $charlist [optional] <p>
  * A list of additional characters which will be considered as 'word'
  * </p>
- * @return mixed an array or an integer, depending on the
+ * @return string[]|int an array or an integer, depending on the
  * format chosen.
- * @since 4.3.0
+ * @since 4.3
  * @since 5.0
  */
 function str_word_count ($string, $format = null, $charlist = null) {}
@@ -424,7 +426,7 @@ function str_split ($string, $split_length = 1) {}
  * @param string $char_list <p>
  * This parameter is case sensitive.
  * </p>
- * @return string a string starting from the character found, or false if it is
+ * @return string|false a string starting from the character found, or false if it is
  * not found.
  * @since 5.0
  */
@@ -492,8 +494,9 @@ function strcoll ($str1, $str2) {}
  * string will be returned unchanged.
  * Non-numeric number causes returning &null; and
  * emitting E_WARNING.
- * @since 4.3.0
+ * @since 4.3
  * @since 5.0
+ * @deprecated 7.4
  */
 function money_format ($format, $number) {}
 
@@ -523,8 +526,14 @@ function money_format ($format, $number) {}
  * </p>
  * <p>
  * Using a negative start
- * ]]>
  * </p>
+ * <pre>
+ * <?php
+ * $rest = substr("abcdef", -1);    // returns "f"
+ * $rest = substr("abcdef", -2);    // returns "ef"
+ * $rest = substr("abcdef", -3, 1); // returns "d"
+ * ?>
+ * </pre>
  * @param int $length [optional] <p>
  * If length is given and is positive, the string
  * returned will contain at most length characters
@@ -543,9 +552,16 @@ function money_format ($format, $number) {}
  * If length is given and is 0,
  * false or &null; an empty string will be returned.
  * </p>
- * Using a negative length
- * ]]>
- * @return string|bool the extracted part of string or false on failure.
+ * Using a negative length:
+ * <pre>
+ * <?php
+ * $rest = substr("abcdef", 0, -1);  // returns "abcde"
+ * $rest = substr("abcdef", 2, -1);  // returns "cde"
+ * $rest = substr("abcdef", 4, -4);  // returns false
+ * $rest = substr("abcdef", -3, -1); // returns "de"
+ * ?>
+ * </pre>
+ * @return string|false the extracted part of string or false on failure.
  * @since 4.0
  * @since 5.0
  */
@@ -583,7 +599,7 @@ function substr ($string, $start, $length = null) {}
  * string at the given
  * start offset.
  * </p>
- * @return mixed The result string is returned. If string is an
+ * @return string|string[] The result string is returned. If string is an
  * array then array is returned.
  * @since 4.0
  * @since 5.0
@@ -621,7 +637,7 @@ function ucfirst ($str) {}
  * The input string.
  * </p>
  * @return string the resulting string.
- * @since 5.3.0
+ * @since 5.3
  */
 function lcfirst ($str) {}
 
@@ -654,10 +670,19 @@ function ucwords ($str, $delimiters = " \t\r\n\f\v") {}
  * translating all occurrences of each character in
  * from to the corresponding character in
  * to.
- * @since 4.0
  * @since 5.0
  */
 function strtr ($str, $from, $to) {}
+
+/**
+ * Translate certain characters
+ * @link https://php.net/manual/en/function.strtr.php
+ * @param string $str The string being translated.
+ * @param array $replace_pairs The replace_pairs parameter may be used as a substitute for to and from in which case it's an array in the form array('from' => 'to', ...).
+ * @return string A copy of str, translating all occurrences of each character in from to the corresponding character in to.
+ * @since 5.0
+ */
+function strtr ($str, array $replace_pairs) {}
 
 /**
  * Quote string with slashes
@@ -689,14 +714,28 @@ function addslashes ($str) {}
  * When you define a sequence of characters in the charlist argument
  * make sure that you know what characters come between the
  * characters that you set as the start and end of the range.
- * ]]>
+ * </p>
+ * <pre>
+ * <?php
+ * echo addcslashes('foo[ ]', 'A..z');
+ * // output:  \f\o\o\[ \]
+ * // All upper and lower-case letters will be escaped
+ * // ... but so will the [\]^_`
+ * ?>
+ * </pre>
+ * <p>
  * Also, if the first character in a range has a higher ASCII value
  * than the second character in the range, no range will be
  * constructed. Only the start, end and period characters will be
  * escaped. Use the ord function to find the
  * ASCII value for a character.
- * ]]>
  * </p>
+ * <pre>
+ * <?php
+ * echo addcslashes("zoo['.']", 'z..A');
+ * // output:  \zoo['\.']
+ * ?>
+ * </pre>
  * <p>
  * Be careful if you choose to escape characters 0, a, b, f, n, r,
  * t and v. They will be converted to \0, \a, \b, \f, \n, \r, \t
@@ -741,15 +780,15 @@ function rtrim ($str, $charlist = " \t\n\r\0\x0B") {}
 /**
  * Replace all occurrences of the search string with the replacement string
  * @link https://php.net/manual/en/function.str-replace.php
- * @param mixed $search <p>
+ * @param string|string[] $search <p>
  * The value being searched for, otherwise known as the needle.
  * An array may be used to designate multiple needles.
  * </p>
- * @param mixed $replace <p>
+ * @param string|string[] $replace <p>
  * The replacement value that replaces found search
  * values. An array may be used to designate multiple replacements.
  * </p>
- * @param mixed $subject <p>
+ * @param string|string[] $subject <p>
  * The string or array being searched and replaced on,
  * otherwise known as the haystack.
  * </p>
@@ -760,7 +799,7 @@ function rtrim ($str, $charlist = " \t\n\r\0\x0B") {}
  * well.
  * </p>
  * @param int $count [optional] If passed, this will hold the number of matched and replaced needles.
- * @return mixed This function returns a string or an array with the replaced values.
+ * @return string|string[] This function returns a string or an array with the replaced values.
  * @since 4.0
  * @since 5.0
  */
@@ -786,7 +825,7 @@ function str_replace ($search, $replace, $subject, &$count = null) {}
  * be returned in count which is passed by
  * reference.
  * </p>
- * @return mixed a string or an array of replacements.
+ * @return string|string[] a string or an array of replacements.
  * @since 5.0
  */
 function str_ireplace ($search, $replace, $subject, &$count = null) {}
@@ -821,7 +860,7 @@ function str_repeat ($input, $multiplier) {}
  * @param int $mode [optional] <p>
  * See return values.
  * </p>
- * @return mixed Depending on mode
+ * @return int[]|string Depending on mode
  * count_chars returns one of the following:
  * 0 - an array with the byte-value as key and the frequency of
  * every byte as value.
@@ -966,7 +1005,7 @@ function similar_text ($first, $second, &$percent = null) {}
  * <p>
  * If the limit parameter is zero, then this is treated as 1.
  * </p>
- * @return array If delimiter is an empty string (""),
+ * @return string[]|false If delimiter is an empty string (""),
  * explode will return false.
  * If delimiter contains a value that is not
  * contained in string and a negative
@@ -1069,7 +1108,7 @@ function join ($glue = "", $pieces) {}
  * for a possibly not available locale.
  * </p>
  * @param string $_ [optional] 
- * @return string the new current locale, or false if the locale functionality is
+ * @return string|false the new current locale, or false if the locale functionality is
  * not implemented on your platform, the specified locale does not exist or
  * the category name is invalid.
  * </p>

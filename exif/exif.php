@@ -5,9 +5,10 @@
 /**
  * Reads the EXIF headers from JPEG or TIFF
  * @link https://php.net/manual/en/function.exif-read-data.php
- * @param string $filename <p>
- * The name of the image file being read. This cannot be an
- * URL.
+ * @param string|resource $stream <p>
+ * The location of the image file. This cannot be an URL.
+ * Since 7.2.0 this can either be a path to the file (stream wrappers are also supported as usual)
+ * or a stream resource.
  * </p>
  * @param string $sections [optional] <p>
  * Is a comma separated list of sections that need to be present in file
@@ -74,22 +75,23 @@
  * the header names and the array values are the values associated with
  * those headers. If no data can be returned,
  * <b>exif_read_data</b> will return <b>FALSE</b>.
- * @since 4.2.0
+ * @since 4.2
  * @since 5.0
  */
-function exif_read_data ($filename, $sections = null, $arrays = false, $thumbnail = false) {}
+function exif_read_data ($stream, $sections = null, $arrays = false, $thumbnail = false) {}
 
 /**
  * Alias of <b>exif_read_data</b>
  * @link https://php.net/manual/en/function.read-exif-data.php
  * @param $filename
- * @param $sections_needed [optional]
- * @param $sub_arrays [optional]
- * @param $read_thumbnail [optional]
+ * @param $sections [optional]
+ * @param $arrays [optional]
+ * @param $thumbnail [optional]
  * @since 4.0.1
  * @since 5.0
+ * @deprecated 7.2 Use {@see exif_read_data()} instead.
  */
-function read_exif_data ($filename, $sections_needed, $sub_arrays, $read_thumbnail) {}
+function read_exif_data ($filename, $sections = null, $arrays = false, $thumbnail = false) {}
 
 /**
  * Get the header name for an index
@@ -97,9 +99,9 @@ function read_exif_data ($filename, $sections_needed, $sub_arrays, $read_thumbna
  * @param int $index <p>
  * The Tag ID for which a Tag Name will be looked up.
  * </p>
- * @return string the header name, or <b>FALSE</b> if <i>index</i> is
+ * @return string|false the header name, or <b>FALSE</b> if <i>index</i> is
  * not a defined EXIF tag id.
- * @since 4.2.0
+ * @since 4.2
  * @since 5.0
  */
 function exif_tagname ($index) {}
@@ -107,9 +109,10 @@ function exif_tagname ($index) {}
 /**
  * Retrieve the embedded thumbnail of a TIFF or JPEG image
  * @link https://php.net/manual/en/function.exif-thumbnail.php
- * @param string $filename <p>
- * The name of the image file being read. This image contains an
- * embedded thumbnail.
+ * @param string|resource $stream <p>
+ * The location of the image file. This cannot be an URL.
+ * Since 7.2.0 this can either be a path to the file (stream wrappers are also supported as usual)
+ * or a stream resource.
  * </p>
  * @param int $width [optional] <p>
  * The return width of the returned thumbnail.
@@ -121,18 +124,18 @@ function exif_tagname ($index) {}
  * The returned image type of the returned thumbnail. This is either
  * TIFF or JPEG.
  * </p>
- * @return string the embedded thumbnail, or <b>FALSE</b> if the image contains no
+ * @return string|false the embedded thumbnail, or <b>FALSE</b> if the image contains no
  * thumbnail.
- * @since 4.2.0
+ * @since 4.2
  * @since 5.0
  */
-function exif_thumbnail ($filename, &$width = null, &$height = null, &$imagetype = null) {}
+function exif_thumbnail ($stream, &$width = null, &$height = null, &$imagetype = null) {}
 
 /**
  * Determine the type of an image
  * @link https://php.net/manual/en/function.exif-imagetype.php
  * @param string $filename The image being checked.
- * @return int When a correct signature is found, the appropriate constant value will be
+ * @return int|false When a correct signature is found, the appropriate constant value will be
  * returned otherwise the return value is <b>FALSE</b>. The return value is the
  * same value that <b>getimagesize</b> returns in index 2 but
  * <b>exif_imagetype</b> is much faster.
@@ -141,7 +144,7 @@ function exif_thumbnail ($filename, &$width = null, &$height = null, &$imagetype
  * <b>exif_imagetype</b> will emit an <b>E_NOTICE</b>
  * and return <b>FALSE</b> if it is unable to read enough bytes from the file to
  * determine the image type.
- * @since 4.3.0
+ * @since 4.3
  * @since 5.0
  */
 function exif_imagetype ($filename) {}

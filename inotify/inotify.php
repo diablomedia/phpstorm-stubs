@@ -23,7 +23,7 @@ function inotify_add_watch( $inotify_instance, $pathname, $mask )
  * Initialize an inotify instance for use with {@see inotify_add_watch}
  *
  * @link https://php.net/manual/en/function.inotify-init.php
- * @return resource a stream resource or <b>FALSE</b> on error.
+ * @return resource|false a stream resource or <b>FALSE</b> on error.
  */
 function inotify_init()
 {
@@ -53,7 +53,7 @@ function inotify_queue_len( $inotify_instance )
  *
  * @param resource $inotify_instance <p>resource returned by {@link https://php.net/manual/en/function.inotify-init.php inotify_init()}</p>
  *
- * @return array an array of inotify events or <b>FALSE</b> if no events
+ * @return array|false an array of inotify events or <b>FALSE</b> if no events
  * were pending and <i>inotify_instance</i> is non-blocking. Each event
  * is an array with the following keys:
  *
@@ -72,7 +72,7 @@ function inotify_read( $inotify_instance )
  * (PHP &gt;= 5.2.0, PECL inotify &gt;= 0.1.2)<br/>
  * Removes the watch <i>$watch_descriptor</i> from the inotify instance <i>$inotify_instance</i>.
  *
- * @link     http://php.net/manual/en/function.inotify-rm-watch.php
+ * @link     https://secure.php.net/manual/en/function.inotify-rm-watch.php
  *
  * @param resource $inotify_instance <p>resource returned by {@link https://php.net/manual/en/function.inotify-init.php inotify_init()}</p>
  * @param int      $watch_descriptor <p>watch to remove from the instance</p>

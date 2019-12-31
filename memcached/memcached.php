@@ -443,6 +443,8 @@ class Memcached  {
 	const RES_IN_PROGRESS = 46;
 	const RES_MAXIMUM_RETURN = 49;
 
+
+
 	/**
 	 * <p>Failed to create network socket.</p>
 	 * @link https://php.net/manual/en/memcached.constants.php
@@ -583,7 +585,7 @@ class Memcached  {
 	 * @param int $flags [optional] <p>
 	 * The flags for the get operation.
 	 * </p>
-	 * @return array the array of found items or <b>FALSE</b> on failure.
+	 * @return array|false the array of found items or <b>FALSE</b> on failure.
 	 * Use <b>Memcached::getResultCode</b> if necessary.
 	 */
 	public function getMultiByKey ($server_key, array $keys, $flags = 0) {}
@@ -631,7 +633,7 @@ class Memcached  {
 	 * (PECL memcached &gt;= 0.1.0)<br/>
 	 * Fetch the next result
 	 * @link https://php.net/manual/en/memcached.fetch.php
-	 * @return array the next result or <b>FALSE</b> otherwise.
+	 * @return array|false the next result or <b>FALSE</b> otherwise.
 	 * The <b>Memcached::getResultCode</b> will return
 	 * <b>Memcached::RES_END</b> if result set is exhausted.
 	 */
@@ -641,7 +643,7 @@ class Memcached  {
 	 * (PECL memcached &gt;= 0.1.0)<br/>
 	 * Fetch all the remaining results
 	 * @link https://php.net/manual/en/memcached.fetchall.php
-	 * @return array the results or <b>FALSE</b> on failure.
+	 * @return array|false the results or <b>FALSE</b> on failure.
 	 * Use <b>Memcached::getResultCode</b> if necessary.
 	 */
 	public function fetchAll () {}
@@ -978,7 +980,7 @@ class Memcached  {
 	 * @param int $time [optional] <p>
 	 * The amount of time the server will wait to delete the items.
 	 * </p>
-	 * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
+	 * @return array Returns array indexed by keys and where values are indicating whether operation succeeded or not.
 	 * The <b>Memcached::getResultCode</b> will return
 	 * <b>Memcached::RES_NOTFOUND</b> if the key does not exist.
 	 */
@@ -1038,7 +1040,7 @@ class Memcached  {
 	 * @param int $expiry [optional] <p>
 	 * The expiry time to set on the item.
 	 * </p>
-	 * @return int new item's value on success or <b>FALSE</b> on failure.
+	 * @return int|false new item's value on success or <b>FALSE</b> on failure.
 	 */
 	public function increment ($key, $offset = 1, $initial_value = 0, $expiry = 0) {}
 
@@ -1058,7 +1060,7 @@ class Memcached  {
 	 * @param int $expiry [optional] <p>
 	 * The expiry time to set on the item.
 	 * </p>
-	 * @return int item's new value on success or <b>FALSE</b> on failure.
+	 * @return int|false item's new value on success or <b>FALSE</b> on failure.
 	 */
 	public function decrement ($key, $offset = 1, $initial_value = 0, $expiry = 0) {}
 
@@ -1081,7 +1083,7 @@ class Memcached  {
 	 * @param int $expiry [optional] <p>
 	 * The expiry time to set on the item.
 	 * </p>
-	 * @return int new item's value on success or <b>FALSE</b> on failure.
+	 * @return int|false new item's value on success or <b>FALSE</b> on failure.
 	 */
 	public function incrementByKey ($server_key, $key, $offset = 1, $initial_value = 0, $expiry = 0) {}
 
@@ -1104,7 +1106,7 @@ class Memcached  {
 	 * @param int $expiry [optional] <p>
 	 * The expiry time to set on the item.
 	 * </p>
-	 * @return int item's new value on success or <b>FALSE</b> on failure.
+	 * @return int|false item's new value on success or <b>FALSE</b> on failure.
 	 */
 	public function decrementByKey ($server_key, $key, $offset = 1, $initial_value = 0, $expiry = 0) {}
 
@@ -1200,7 +1202,7 @@ class Memcached  {
 	 * (PECL memcached &gt;= 2.0.0)<br/>
 	 * Gets the keys stored on all the servers
 	 * @link https://php.net/manual/en/memcached.getallkeys.php
-	 * @return array the keys stored on all the servers on success or <b>FALSE</b> on failure.
+	 * @return array|false the keys stored on all the servers on success or <b>FALSE</b> on failure.
 	 */
 	public function getAllKeys () {}
 
@@ -1253,7 +1255,7 @@ class Memcached  {
 	/**
 	 * (PECL memcached &gt;= 2.0.0)<br/>
 	 * Set the credentials to use for authentication
-	 * @link http://php.net/manual/en/memcached.setsaslauthdata.php
+	 * @link https://secure.php.net/manual/en/memcached.setsaslauthdata.php
 	 * @param string $username <p>
 	 * The username to use for authentication.
 	 * </p>

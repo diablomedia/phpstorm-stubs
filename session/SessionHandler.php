@@ -6,7 +6,7 @@
  * session_set_save_handler() using its OOP invocation,
  * the class must implement this interface.
  * @link https://php.net/manual/en/class.sessionhandlerinterface.php
- * @since 5.4.0
+ * @since 5.4
  */
 interface SessionHandlerInterface {
 
@@ -17,7 +17,7 @@ interface SessionHandlerInterface {
 	 * The return value (usually TRUE on success, FALSE on failure).
 	 * Note this value is returned internally to PHP for processing.
 	 * </p>
-	 * @since 5.4.0
+	 * @since 5.4
 	 */
 	public function close();
 
@@ -29,7 +29,7 @@ interface SessionHandlerInterface {
 	 * The return value (usually TRUE on success, FALSE on failure).
 	 * Note this value is returned internally to PHP for processing.
 	 * </p>
-	 * @since 5.4.0
+	 * @since 5.4
 	 */
 	public function destroy($session_id);
 
@@ -44,7 +44,7 @@ interface SessionHandlerInterface {
 	 * The return value (usually TRUE on success, FALSE on failure).
 	 * Note this value is returned internally to PHP for processing.
 	 * </p>
-	 * @since 5.4.0
+	 * @since 5.4
 	 */
 	public function gc($maxlifetime);
 
@@ -57,7 +57,7 @@ interface SessionHandlerInterface {
 	 * The return value (usually TRUE on success, FALSE on failure).
 	 * Note this value is returned internally to PHP for processing.
 	 * </p>
-	 * @since 5.4.0
+	 * @since 5.4
 	 */
 	public function open($save_path, $name);
 
@@ -71,7 +71,7 @@ interface SessionHandlerInterface {
 	 * If nothing was read, it must return an empty string.
 	 * Note this value is returned internally to PHP for processing.
 	 * </p>
-	 * @since 5.4.0
+	 * @since 5.4
 	 */
 	public function read($session_id);
 
@@ -90,9 +90,23 @@ interface SessionHandlerInterface {
 	 * The return value (usually TRUE on success, FALSE on failure).
 	 * Note this value is returned internally to PHP for processing.
 	 * </p>
-	 * @since 5.4.0
+	 * @since 5.4
 	 */
 	public function write($session_id, $session_data);
+}
+
+/**
+ * <b>SessionIdInterface</b>
+ * @link https://php.net/manual/en/class.sessionidinterface.php
+ * @since 5.5.1
+ */
+interface SessionIdInterface {
+    /**
+     * Create session ID
+     * @link https://php.net/manual/en/sessionidinterface.create-sid.php
+     * @return string
+     */
+    public function create_sid();
 }
 
 /**
@@ -100,7 +114,7 @@ interface SessionHandlerInterface {
  * defines a prototype for updating the life time of an existing session.
  * In order to use the lazy_write option must be enabled and a custom session
  * handler must implement this interface.
- * @since 7.0.0
+ * @since 7.0
  */
 interface SessionUpdateTimestampHandlerInterface {
 
@@ -142,9 +156,10 @@ interface SessionUpdateTimestampHandlerInterface {
  * PHP extensions such as SQLite (as sqlite),
  * Memcache (as memcache), and Memcached (as memcached).
  * @link https://php.net/manual/en/class.reflectionzendextension.php
- * @since 5.4.0
+ * @since 5.4
  */
-class SessionHandler implements SessionHandlerInterface, SessionUpdateTimestampHandlerInterface {
+class SessionHandler implements SessionHandlerInterface, SessionIdInterface
+{
 
 	/**
 	 * Close the session
@@ -153,7 +168,7 @@ class SessionHandler implements SessionHandlerInterface, SessionUpdateTimestampH
 	 * The return value (usually TRUE on success, FALSE on failure).
 	 * Note this value is returned internally to PHP for processing.
 	 * </p>
-	 * @since 5.4.0
+	 * @since 5.4
 	 */
 	public function close() { }
 
@@ -173,7 +188,7 @@ class SessionHandler implements SessionHandlerInterface, SessionUpdateTimestampH
 	 * The return value (usually TRUE on success, FALSE on failure).
 	 * Note this value is returned internally to PHP for processing.
 	 * </p>
-	 * @since 5.4.0
+	 * @since 5.4
 	 */
 	public function destroy($session_id) { }
 
@@ -188,7 +203,7 @@ class SessionHandler implements SessionHandlerInterface, SessionUpdateTimestampH
 	 * The return value (usually TRUE on success, FALSE on failure).
 	 * Note this value is returned internally to PHP for processing.
 	 * </p>
-	 * @since 5.4.0
+	 * @since 5.4
 	 */
 	public function gc($maxlifetime) { }
 
@@ -201,7 +216,7 @@ class SessionHandler implements SessionHandlerInterface, SessionUpdateTimestampH
 	 * The return value (usually TRUE on success, FALSE on failure).
 	 * Note this value is returned internally to PHP for processing.
 	 * </p>
-	 * @since 5.4.0
+	 * @since 5.4
 	 */
 	public function open($save_path, $session_name) { }
 
@@ -215,7 +230,7 @@ class SessionHandler implements SessionHandlerInterface, SessionUpdateTimestampH
 	 * If nothing was read, it must return an empty string.
 	 * Note this value is returned internally to PHP for processing.
 	 * </p>
-	 * @since 5.4.0
+	 * @since 5.4
 	 */
 	public function read($session_id) { }
 
@@ -234,7 +249,7 @@ class SessionHandler implements SessionHandlerInterface, SessionUpdateTimestampH
 	 * The return value (usually TRUE on success, FALSE on failure).
 	 * Note this value is returned internally to PHP for processing.
 	 * </p>
-	 * @since 5.4.0
+	 * @since 5.4
 	 */
 	public function write($session_id, $session_data) { }
 

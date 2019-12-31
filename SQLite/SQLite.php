@@ -28,7 +28,7 @@ class SQLiteDatabase  {
 	 * @param $result_type [optional]
 	 * <p>The optional <i>result_type</i> parameter accepts a constant and determines how the returned array will be indexed. Using <b>SQLITE_ASSOC</b> will return only associative indices (named fields) while <b>SQLITE_NUM</b> will return only numerical indices (ordinal field numbers). <b>SQLITE_BOTH</b> will return both associative and numerical indices. <b>SQLITE_BOTH</b> is the default for this function.</p>
 	 * @param $error_message [optional] <p>The specified variable will be filled if an error occurs. This is specially important because SQL syntax errors can't be fetched using the {@see sqlite_last_error()} function.</p>
-	 * @return resource|bool <p>
+	 * @return resource|false <p>
 	 * This function will return a result handle or <b>FALSE</b> on failure.
 	 * For queries that return rows, the result handle can then be used with
 	 * functions such as {@see sqlite_fetch_array()} and
@@ -61,7 +61,7 @@ class SQLiteDatabase  {
 	 * </p>
 	 * @param string $error_message [optional] <p>The specified variable will be filled if an error occurs. This is specially important because SQL syntax errors can't be fetched using the
 	 * {@see sqlite_last_error()} function.</p>
-	 * @return boolean <p>
+	 * @return bool <p>
 	 * This function will return a boolean result; <b>TRUE</b> for success or <b>FALSE</b> for failure.
 	 * If you need to run a query that returns rows, see {@see sqlite_query()}.
 	 * </p>
@@ -381,7 +381,7 @@ final class SQLiteResult implements Iterator, Countable {
 	/**
 	 * Checks if current position is valid
 	 * @link https://php.net/manual/en/iterator.valid.php
-	 * @return boolean <p>
+	 * @return bool <p>
 	 * Returns <b>TRUE</b> if there are more rows available from the
 	 * <i>result</i> handle, or <b>FALSE</b> otherwise.
 	 * </p>
@@ -411,7 +411,7 @@ final class SQLiteResult implements Iterator, Countable {
 	/**
 	 * Seek to the previous row number of a result set
 	 * @link https://php.net/manual/en/function.sqlite-prev.php
-	 * @return boolean <p> Returns <b>TRUE</b> on success, or <b>FALSE</b> if there are no more previous rows.
+	 * @return bool <p> Returns <b>TRUE</b> on success, or <b>FALSE</b> if there are no more previous rows.
 	 * </p>
 	 * @since 5.4.0
 	 */

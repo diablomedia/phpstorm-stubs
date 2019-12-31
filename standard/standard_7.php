@@ -12,7 +12,7 @@
  * @param int $port [optional] <p>
  * The port number.
  * </p>
- * @param int $errno [optional] <p>
+ * @param int &$errno [optional] <p>
  * If provided, holds the system level error number that occurred in the
  * system-level connect() call.
  * </p>
@@ -23,7 +23,7 @@
  * connect() call. This is most likely due to a
  * problem initializing the socket.
  * </p>
- * @param string $errstr [optional] <p>
+ * @param string &$errstr [optional] <p>
  * The error message as a string.
  * </p>
  * @param float $timeout [optional] <p>
@@ -36,7 +36,7 @@
  * fsockopen only applies while connecting the
  * socket.
  * </p>
- * @return resource fsockopen returns a file pointer which may be used
+ * @return resource|false fsockopen returns a file pointer which may be used
  * together with the other file functions (such as
  * fgets, fgetss,
  * fwrite, fclose, and
@@ -49,12 +49,13 @@ function fsockopen ($hostname, $port = null, &$errno = null, &$errstr = null, $t
 /**
  * Open persistent Internet or Unix domain socket connection
  * @link https://php.net/manual/en/function.pfsockopen.php
- * @param string $hostname 
- * @param int $port [optional] 
- * @param int $errno [optional] 
- * @param string $errstr [optional] 
- * @param float $timeout [optional] 
- * @return resource 
+ * @see fsockopen
+ * @param string $hostname
+ * @param int $port [optional]
+ * @param int &$errno [optional]
+ * @param string &$errstr [optional]
+ * @param float $timeout [optional]
+ * @return resource|false
  * @since 4.0
  * @since 5.0
  */
@@ -140,11 +141,11 @@ function pfsockopen ($hostname, $port = null, &$errno = null, &$errstr = null, $
  * </tr>
  * <tr valign="top">
  * <td>f</td>
- * <td>float (machine dependent size and representation)</td>
+ * <td>float (machine dependent size and representation, both little and big endian)</td>
  * </tr>
  * <tr valign="top">
  * <td>d</td>
- * <td>double (machine dependent size and representation)</td>
+ * <td>double (machine dependent size and representation, both little and big endian)</td>
  * </tr>
  * <tr valign="top">
  * <td>x</td>
@@ -163,7 +164,7 @@ function pfsockopen ($hostname, $port = null, &$errno = null, &$errstr = null, $
  * @param mixed $args [optional] <p>
  * </p>
  * @param mixed $_ [optional] 
- * @return string a binary string containing data.
+ * @return string|false a binary string containing data or false if the format string contains errors
  * @since 4.0
  * @since 5.0
  */
@@ -179,12 +180,12 @@ function pack ($format, $args = null, $_ = null) {}
  * The packed data.
  * </p>
  * @param int $offset [optional]
- * @return array an associative array containing unpacked elements of binary
- * string.
+ * @return array|false an associative array containing unpacked elements of binary
+ * string or false if the format string contains errors
  * @since 4.0
  * @since 5.0
  */
-function unpack ($format, $data, $offset) {}
+function unpack ($format, $data, $offset = 0) {}
 
 /**
  * Tells what the user's browser is capable of
@@ -201,7 +202,7 @@ function unpack ($format, $data, $offset) {}
  * If set to true, this function will return an array
  * instead of an object.
  * </p>
- * @return mixed The information is returned in an object or an array which will contain
+ * @return array|object|false Returns false if browscap.ini can't be loaded or the user agent can't be found, otherwise the information is returned in an object or an array which will contain
  * various data elements representing, for instance, the browser's major and
  * minor version numbers and ID string; true/false values for features
  * such as frames, JavaScript, and cookies; and so forth.
@@ -233,7 +234,7 @@ function get_browser ($user_agent = null, $return_array = null) {}
  * is generated once. If you are calling this function repeatedly, this
  * may impact both appearance and security.
  * </p>
- * @return string the encrypted string.
+ * @return string|null the encrypted string or <b>NULL</b> if an error occurs
  * @since 4.0
  * @since 5.0
  */
@@ -250,7 +251,7 @@ function crypt ($str, $salt = null) {}
  * refer to the streams section of
  * the manual.
  * </p>
- * @return resource|bool a directory handle resource on success, or
+ * @return resource|false a directory handle resource on success, or
  * false on failure.
  * </p> 
  * <p>
@@ -309,15 +310,16 @@ function chroot ($directory) {}
 /**
  * Gets the current working directory
  * @link https://php.net/manual/en/function.getcwd.php
- * @return string the current working directory on success, or false on
- * failure.
- * </p> 
- * <p>
+ * @return string|false <p>
+ * the current working directory on success, or false on
+ * failure. <br>
+ * <br>
  * On some Unix variants, getcwd will return
  * false if any one of the parent directories does not have the
  * readable or search mode set, even if the current directory
  * does. See chmod for more information on
  * modes and permissions.
+ * </p>
  * @since 4.0
  * @since 5.0
  */
@@ -347,7 +349,7 @@ function rewinddir ($dir_handle = null) {}
  * not specified, the last link opened by opendir 
  * is assumed.
  * </p>
- * @return string|bool the filename on success or false on failure.
+ * @return string|false the filename on success or false on failure.
  * @since 4.0
  * @since 5.0
  */
@@ -355,14 +357,17 @@ function readdir ($dir_handle = null) {}
 
 /**
  * Return an instance of the Directory class
- * @link https://php.net/manual/en/class.dir.php
- * @param $directory
- * @param $context [optional]
- * @return Directory 
+ * @link https://php.net/manual/en/function.dir.php
+ * @param string $directory <p>
+ * Directory to open
+ * </p>
+ * @param resource $context [optional]
+ * @return Directory|null|false an instance of Directory, or <b>NULL</b> with wrong
+ * parameters, or <b>FALSE</b> in case of another error
  * @since 4.0
  * @since 5.0
  */
-function dir ($directory, $context) {}
+function dir ($directory, $context = null) {}
 
 /**
  * List files and directories inside the specified path
@@ -380,7 +385,7 @@ function dir ($directory, $context) {}
  * refer to the streams section of
  * the manual.
  * </p>
- * @return array an array of filenames on success, or false on 
+ * @return array|false an array of filenames on success, or false on 
  * failure. If directory is not a directory, then 
  * boolean false is returned, and an error of level 
  * E_WARNING is generated.
@@ -409,7 +414,7 @@ function scandir ($directory, $sorting_order = null, $context = null) {}
  * <p>
  * On some systems it is impossible to distinguish between empty match and an
  * error.
- * @since 4.3.0
+ * @since 4.3
  * @since 5.0
  */
 function glob ($pattern, $flags = null) {}
@@ -420,7 +425,7 @@ function glob ($pattern, $flags = null) {}
  * @param string $filename <p>
  * Path to the file.
  * </p>
- * @return int|bool the time the file was last accessed, or false on failure.
+ * @return int|false the time the file was last accessed, or false on failure.
  * The time is returned as a Unix timestamp.
  * @since 4.0
  * @since 5.0
@@ -433,7 +438,7 @@ function fileatime ($filename) {}
  * @param string $filename <p>
  * Path to the file.
  * </p>
- * @return int|bool the time the file was last changed, or false on failure.
+ * @return int|false the time the file was last changed, or false on failure.
  * The time is returned as a Unix timestamp.
  * @since 4.0
  * @since 5.0
@@ -446,7 +451,7 @@ function filectime ($filename) {}
  * @param string $filename <p>
  * Path to the file.
  * </p>
- * @return int|bool the group ID of the file, or false in case
+ * @return int|false the group ID of the file, or false in case
  * of an error. The group ID is returned in numerical format, use
  * posix_getgrgid to resolve it to a group name.
  * Upon failure, false is returned.
@@ -461,7 +466,7 @@ function filegroup ($filename) {}
  * @param string $filename <p>
  * Path to the file.
  * </p>
- * @return int|bool the inode number of the file, or false on failure.
+ * @return int|false the inode number of the file, or false on failure.
  * @since 4.0
  * @since 5.0
  */
@@ -473,7 +478,7 @@ function fileinode ($filename) {}
  * @param string $filename <p>
  * Path to the file.
  * </p>
- * @return int|bool the time the file was last modified, or false on failure.
+ * @return int|false the time the file was last modified, or false on failure.
  * The time is returned as a Unix timestamp, which is
  * suitable for the date function.
  * @since 4.0
@@ -487,7 +492,7 @@ function filemtime ($filename) {}
  * @param string $filename <p>
  * Path to the file.
  * </p>
- * @return int|bool the user ID of the owner of the file, or false on failure.
+ * @return int|false the user ID of the owner of the file, or false on failure.
  * The user ID is returned in numerical format, use
  * posix_getpwuid to resolve it to a username.
  * @since 4.0
@@ -501,7 +506,7 @@ function fileowner ($filename) {}
  * @param string $filename <p>
  * Path to the file.
  * </p>
- * @return int|bool the permissions on the file, or false on failure.
+ * @return int|false the permissions on the file, or false on failure.
  * @since 4.0
  * @since 5.0
  */
@@ -513,7 +518,7 @@ function fileperms ($filename) {}
  * @param string $filename <p>
  * Path to the file.
  * </p>
- * @return int the size of the file in bytes, or false (and generates an error
+ * @return int|false the size of the file in bytes, or false (and generates an error
  * of level E_WARNING) in case of an error.
  * @since 4.0
  * @since 5.0
@@ -526,7 +531,7 @@ function filesize ($filename) {}
  * @param string $filename <p>
  * Path to the file.
  * </p>
- * @return string the type of the file. Possible values are fifo, char,
+ * @return string|false the type of the file. Possible values are fifo, char,
  * dir, block, link, file, socket and unknown.
  * </p>
  * <p>
@@ -668,7 +673,7 @@ function is_link ($filename) {}
  * @param string $filename <p>
  * Path to the file.
  * </p>
- * @return array <table>
+ * @return array|false <table>
  * stat and fstat result
  * format
  * <tr valign="top">
@@ -758,10 +763,11 @@ function stat ($filename) {}
 /**
  * Gives information about a file or symbolic link
  * @link https://php.net/manual/en/function.lstat.php
+ * @see stat
  * @param string $filename <p>
  * Path to a file or a symbolic link.
  * </p>
- * @return array See the manual page for stat for information on
+ * @return array|false See the manual page for stat for information on
  * the structure of the array that lstat returns.
  * This function is identical to the stat function
  * except that if the filename parameter is a symbolic
@@ -842,9 +848,13 @@ function lchgrp ($filename, $group) {}
  * not work properly. To ensure the expected operation,
  * you need to prefix mode with a zero (0):
  * </p>
- * <p>
- * ]]>
- * </p>
+ * <pre>
+ * <?php 
+ * chmod("/somedir/somefile", 755);   // decimal; probably incorrect 
+ * chmod("/somedir/somefile", "u+rwx,go+rx"); // string; incorrect 
+ * chmod("/somedir/somefile", 0755);  // octal; correct value of mode 
+ * ?>
+ * </pre>
  * <p>
  * The mode parameter consists of three octal
  * number components specifying access restrictions for the owner,
@@ -907,9 +917,9 @@ function clearstatcache ($clear_realpath_cache = null, $filename = null) {}
  * @param string $directory <p>
  * A directory of the filesystem or disk partition.
  * </p>
- * @return float|bool the total number of bytes as a float
+ * @return float|false the total number of bytes as a float
  * or false on failure.
- * @since 4.1.0
+ * @since 4.1
  * @since 5.0
  */
 function disk_total_space ($directory) {}
@@ -925,21 +935,22 @@ function disk_total_space ($directory) {}
  * function is unspecified and may differ between operating systems and
  * PHP versions.
  * </p>
- * @return float|bool the number of available bytes as a float
+ * @return float|false the number of available bytes as a float
  * or false on failure.
- * @since 4.1.0
+ * @since 4.1
  * @since 5.0
  */
 function disk_free_space ($directory) {}
 
 /**
- * &Alias; <function>disk_free_space</function>
+ * Alias of disk_free_space()
  * @link https://php.net/manual/en/function.diskfreespace.php
- * @param $path
+ * @see disk_free_space
+ * @param $directory
  * @since 4.0
  * @since 5.0
  */
-function diskfreespace ($path) {}
+function diskfreespace ($directory) {}
 
 /**
  * Send mail
@@ -969,13 +980,19 @@ function diskfreespace ($path) {}
  * than 70 characters.
  * </p>
  * <p>
+ * <strong>Caution</strong>
  * (Windows only) When PHP is talking to a SMTP server directly, if a full
  * stop is found on the start of a line, it is removed. To counter-act this,
  * replace these occurrences with a double dot.
- * ]]>
  * </p>
- * @param string $additional_headers [optional] <p>
- * String to be inserted at the end of the email header.
+ * <pre>
+ * <?php
+ * $text = str_replace("\n.", "\n..", $text);
+ * ?>
+ * </pre>
+ * @param string|array $additional_headers [optional] <p>
+ * String or array to be inserted at the end of the email header.<br/>
+ * Since 7.2.0 accepts an array. Its keys are the header names and its values are the respective header values.
  * </p>
  * <p>
  * This is typically used to add extra headers (From, Cc, and Bcc).
@@ -1034,6 +1051,7 @@ function mail ($to, $subject, $message, $additional_headers = null, $additional_
  * @return int The hash value of addr.
  * @since 4.0.2
  * @since 5.0
+ * @deprecated 7.4
  */
 function ezmlm_hash ($addr) {}
 

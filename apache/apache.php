@@ -40,7 +40,7 @@ function apache_get_version () {}
  * Whether to get the top-level variable available to all Apache layers.
  * </p>
  * @return string|false The value of the Apache environment variable on success, or <b>FALSE</b> on failure.
- * @since 4.3.0
+ * @since 4.3
  * @since 5.0
  */
 function apache_getenv ( $variable, $walk_to_top = false ) {}
@@ -80,7 +80,7 @@ function apache_note ( $note_name, $note_value = '' ) {}
  * Fetches all HTTP request headers from the current request
  * @link https://php.net/manual/en/function.apache-request-headers.php
  * @return array|false An associative array of all the HTTP headers in the current request, or <b>FALSE</b on failure.
- * @since 4.3.0
+ * @since 4.3
  * @since 5.0
  */
 function apache_request_headers () {}
@@ -91,7 +91,7 @@ function apache_request_headers () {}
  * This function requires Apache 1.
  * @link https://php.net/manual/en/function.apache-reset-timeout.php
  * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
- * @since 5.1.0
+ * @since 5.1
  */
 function apache_reset_timeout () {}
 
@@ -99,7 +99,7 @@ function apache_reset_timeout () {}
  * Fetch all HTTP response headers
  * @link https://php.net/manual/en/function.apache-response-headers.php
  * @return array|false An array of all Apache response headers on success or <b>FALSE</b> on failure.
- * @since 4.3.0
+ * @since 4.3
  * @since 5.0
  */
 function apache_response_headers () {}
@@ -118,7 +118,7 @@ function apache_response_headers () {}
  * Whether to set the top-level variable available to all Apache layers.
  * </p>
  * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
- * @since 4.2.0
+ * @since 4.2
  * @since 5.0
  */
 function apache_setenv ( $variable, $value, $walk_to_top = false ) {}
@@ -138,7 +138,7 @@ function getallheaders () {}
  * virtual() is an Apache-specific function which is similar to <!--#include virtual...--> in mod_include. It performs an Apache sub-request. It is useful for including CGI scripts or .shtml files, or anything else that you would parse through Apache. Note that for a CGI script, the script must generate valid CGI headers. At the minimum that means it must generate a Content-Type header.
  * To run the sub-request, all buffers are terminated and flushed to the browser, pending headers are sent too.
  * This function is supported when PHP is installed as an Apache module or by the NSAPI server module in Netscape/iPlanet/SunONE webservers.
- * @link hhttp://php.net/manual/en/function.virtual.php
+ * @link https://secure.php.net/manual/en/function.virtual.php
  * @param string $filename <p>
  * The file that the virtual command will be performed on.
  * </p>

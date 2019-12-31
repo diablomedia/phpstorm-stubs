@@ -6,7 +6,7 @@
  */
 /**
  * Grpc
- * @see http://grpc.io
+ * @see https://grpc.io
  * @see https://github.com/grpc/grpc/tree/master/src/php/ext/grpc
  */
 namespace Grpc
@@ -513,7 +513,7 @@ namespace Grpc
          * @throws \InvalidArgumentException
          */
         public static function createSsl(
-            $pem_root_certs,
+            $pem_root_certs = '',
             $pem_private_key = '',
             $pem_cert_chain = ''
         ) {}
